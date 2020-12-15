@@ -1,4 +1,5 @@
 import {
+  BASE_PATH_TOURISM_ODHACTIVITYPOI,
   BASE_PATH_TOURISM_ODHACTIVITYPOI_REDUCED,
   BASE_PATH_TOURISM_SKIAREA,
 } from "./config";
@@ -43,7 +44,7 @@ export const requestTourismODHActivityPoiType2 = async (
 ) => {
   try {
     const request = await fetch(
-      `${BASE_PATH_TOURISM_ODHACTIVITYPOI_REDUCED}?type=2&fields=GpsInfo${createUrlFilters(
+      `${BASE_PATH_TOURISM_ODHACTIVITYPOI_REDUCED}?type=2&fields=Id,GpsInfo${createUrlFilters(
         filters,
         currentLocation
       )}`
@@ -58,23 +59,25 @@ export const requestTourismODHActivityPoiType2 = async (
   }
 };
 
-// export const requestTourismMountainAreaCodes = async () => {
-//   try {
-//     const request = await fetch(`${BASE_PATH_TOURISM_ACTIVITYTYPES}`);
-//     if (request.status !== 200) {
-//       throw new Error(request.statusText);
-//     }
-//     const response = await request.json();
-//     return response;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
 export const requestSkiAreaDetails = async ({ Id }) => {
   try {
     const request = await fetch(
       `${BASE_PATH_TOURISM_SKIAREA}/${Id}?elements=0`
+    );
+    if (request.status !== 200) {
+      throw new Error(request.statusText);
+    }
+    const response = await request.json();
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const requestActivityDetails = async ({ Id }) => {
+  try {
+    const request = await fetch(
+      `${BASE_PATH_TOURISM_ODHACTIVITYPOI}/${Id}?elements=0`
     );
     if (request.status !== 200) {
       throw new Error(request.statusText);

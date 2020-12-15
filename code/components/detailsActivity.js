@@ -4,44 +4,65 @@ import { SIDE_MODAL_ROW_TYPES } from "../shared_components/sideModalRow/sideModa
 import { t } from "../translations";
 
 export function render_details_activity() {
-  const { Detail, Latitude, Longitude } = this.currentSkiArea;
-  console.log(this.currentSkiArea);
+  // console.log(this.currentActivity);
 
-  const { TopicRIDs, LocationInfo } = this.currentSkiArea;
-  const { DateBegin, DateEnd } = this.currentSkiArea;
-  const { ContactInfos, OrganizerInfos } = this.currentSkiArea;
+  const { Detail, Latitude, Longitude } = this.currentActivity;
+  console.log(this.currentActivity);
+
+  // const { TopicRIDs, LocationInfo } = this.currentActivity;
+  // const { DateBegin, DateEnd } = this.currentActivity;
+  // const { ContactInfos, OrganizerInfos } = this.currentActivity;
 
   const { Title, BaseText } = Detail[this.language];
-  // ContactInfos
-  const { Address, City, CompanyName, CountryCode, CountryName } = ContactInfos[
-    this.language
-  ];
-  const { Email, Faxnumber } = ContactInfos[this.language];
-  const { Phonenumber, Url, ZipCode } = ContactInfos[this.language];
+  // // ContactInfos
+  // const { Address, City, CompanyName, CountryCode, CountryName } = ContactInfos[
+  //   this.language
+  // ];
+  // const { Email, Faxnumber } = ContactInfos[this.language];
+  // const { Phonenumber, Url, ZipCode } = ContactInfos[this.language];
 
   // const topicText = this.listMountainAreaTopics.filter((topic) => {
   //   return topic.Id === TopicRIDs[0];
   // })[0].TypeDesc[this.language];
 
+  return html`
+    <div class="details">
+      <div class="header">
+        <wc-sidemodal-header
+          .type="title"
+          .tTitle="${Title}"
+          .tLinkedTagText="${"..."}"
+          .tOptionalLink="${{
+            text: t["directions"][this.language],
+            url: `http://www.google.com/maps/place/${Latitude},${Longitude}`,
+          }}"
+          .closeModalAction="${() => {
+            this.detailsSkiAreaOpen = false;
+            this.detailsActivityOpen = false;
+          }}"
+        ></wc-sidemodal-header>
+      </div>
+      <div>
+        <wc-divider></wc-divider>
+      </div>
+      <div>
+        <div>
+          <p class="caption space">
+            ${t["information"][this.language].toUpperCase()}
+          </p>
+        </div>
+        ${BaseText
+          ? html`<wc-sidemodal-row
+              .type="${SIDE_MODAL_ROW_TYPES.vertical}"
+              .title="${t["description"][this.language]}"
+              .text="${BaseText}"
+            ></wc-sidemodal-row>`
+          : null}
+      </div>
+    </div>
+  `;
+
   return html` <div class="details">
-    <div class="header">
-      <wc-sidemodal-header
-        .type="title"
-        .tTitle="${Title}"
-        .tLinkedTagText="${topicText}"
-        .tOptionalLink="${{
-          text: t["directions"][this.language],
-          url: `http://www.google.com/maps/place/${Latitude},${Longitude}`,
-        }}"
-        .closeModalAction="${() => {
-          this.detailsSkiAreaOpen = false;
-          this.detailsActivityOpen = false;
-        }}"
-      ></wc-sidemodal-header>
-    </div>
-    <div>
-      <wc-divider></wc-divider>
-    </div>
     <div>
       <div>
         <p class="caption space">

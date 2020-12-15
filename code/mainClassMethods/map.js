@@ -3,14 +3,18 @@ import leaflet_mrkcls from "leaflet.markercluster";
 import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 import {
+  requestActivityDetails,
   requestSkiAreaDetails,
-  requestTourismSkiArea,
   requestTourismODHActivityPoiType2,
+  requestTourismSkiArea,
 } from "../api/mountainArea";
-import pinSnow from "../assets/pin-snow.svg";
 import pinSki from "../assets/pin-ski.svg";
+import pinSnow from "../assets/pin-snow.svg";
 import user__marker from "../assets/user.svg";
 import { getLatLongFromStationDetail, get_system_language } from "../utils";
+
+let STORE_zoomLevel = 10;
+let STORE_position = [];
 
 export async function initializeMap() {
   const DefaultIcon = Leaflet.icon({
@@ -30,10 +34,16 @@ export async function initializeMap() {
     attribution: this.mapAttribution,
   }).addTo(this.map);
 
-  this.map.setView(
-    { lat: this.currentLocation.lat, lon: this.currentLocation.lng },
-    10
-  );
+  console.log(STORE_zoomLevel);
+
+  if (STORE_position.length) {
+    this.map.setView(STORE_position, STORE_zoomLevel);
+  } else {
+    this.map.setView(
+      { lat: this.currentLocation.lat, lon: this.currentLocation.lng },
+      STORE_zoomLevel
+    );
+  }
 }
 
 export function drawUserOnMap() {
@@ -125,22 +135,7 @@ export async function drawMountainAreaOnMap() {
 
   const mountainArea_layer = Leaflet.layerGroup(skiArea_layer_array, {});
 
-  // this.layer_mountainArea = new leaflet_mrkcls.MarkerClusterGroup({
-  //   showCoverageOnHover: false,
-  //   chunkedLoading: true,
-  //   iconCreateFunction(cluster) {
-  //     return Leaflet.divIcon({
-  //       html: `<div class="marker_cluster__marker">${cluster.getChildCount()}</div>`,
-  //       iconSize: Leaflet.point(36, 36),
-  //     });
-  //   },
-  // });
-
-  /** Add maker layer in the cluster group */
-  // this.layer_mountainArea.addLayer(mountainArea_layer);
-
-  /** Add the cluster group to the map */
-  // this.map.addLayer(this.layer_mountainArea);
+  /** Add the layer to map */
   this.map.addLayer(mountainArea_layer);
 
   // Activities
@@ -168,16 +163,24 @@ export async function drawMountainAreaOnMap() {
       );
 
       const action = async () => {
-        const details = await requestSkiAreaDetails({
+        const details = await requestActivityDetails({
           Id: activity.Id,
         });
         if (details) {
           console.log(details);
-
           this.currentActivity = {
             ...details,
           };
         }
+        console.log(this.map._zoom);
+
+        STORE_zoomLevel = 14;
+        STORE_position = [marker_position.lat, marker_position.lng];
+
+        this.map.setView(
+          [marker_position.lat, marker_position.lng],
+          STORE_zoomLevel
+        );
 
         this.filtersOpen = false;
         this.detailsSkiAreaOpen = false;
@@ -202,7 +205,7 @@ export async function drawMountainAreaOnMap() {
     },
   });
 
-  /** Add maker layer in the cluster group */
+  /** Add marker layer in the cluster group */
   this.layer_activities.addLayer(activities_layer);
 
   /** Add the cluster group to the map */

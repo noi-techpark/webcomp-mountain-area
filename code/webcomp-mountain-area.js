@@ -2,6 +2,7 @@ import "@babel/polyfill";
 import leafletStyle from "leaflet/dist/leaflet.css";
 import { css, html, LitElement, unsafeCSS } from "lit-element";
 import { requestGetCoordinatesFromSearch } from "./api/hereMaps";
+import { render_details_activity } from "./components/detailsActivity";
 import { render_details_skiArea } from "./components/detailsSkiArea";
 import { render_filters } from "./components/filters";
 import { render__mapControls } from "./components/mapControls";
