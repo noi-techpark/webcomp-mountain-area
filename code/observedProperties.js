@@ -13,15 +13,17 @@ export const observedProperties = {
 
   listMountainArea: { type: Array },
   listMountainAreaCurrentPage: { type: Number },
-  currentEvent: { type: Object },
+  currentSkiArea: { type: Object },
+  currentActivity: { type: Object },
 
   listMountainAreaTopics: { type: Array },
 
-  detailsOpen: { type: Boolean },
+  detailsSkiAreaOpen: { type: Boolean },
+  detailsActivityOpen: { type: Boolean },
   filtersOpen: { type: Boolean },
 
   // Filters
-  filters: { type: Object },
+  poiFilters: { type: Object },
 
   filtersAccordionOpen: { type: Object },
 };

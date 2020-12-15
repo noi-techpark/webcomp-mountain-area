@@ -3,12 +3,14 @@ import { html } from "lit-element";
 import { SIDE_MODAL_ROW_TYPES } from "../shared_components/sideModalRow/sideModalRow";
 import { t } from "../translations";
 
-export function render_details() {
-  const { Detail, Latitude, Longitude } = this.currentEvent;
+export function render_details_skiArea() {
+  const { Detail, Latitude, Longitude } = this.currentSkiArea;
+  console.log(this.currentSkiArea);
 
-  const { TopicRIDs, LocationInfo } = this.currentEvent;
-  const { DateBegin, DateEnd } = this.currentEvent;
-  const { ContactInfos, OrganizerInfos } = this.currentEvent;
+  const { TopicRIDs, LocationInfo } = this.currentSkiArea;
+  const { DateBegin, DateEnd } = this.currentSkiArea;
+  const { ContactInfos, OrganizerInfos } = this.currentSkiArea;
+
   const { Title, BaseText } = Detail[this.language];
   // ContactInfos
   const { Address, City, CompanyName, CountryCode, CountryName } = ContactInfos[
@@ -17,9 +19,9 @@ export function render_details() {
   const { Email, Faxnumber } = ContactInfos[this.language];
   const { Phonenumber, Url, ZipCode } = ContactInfos[this.language];
 
-  const topicText = this.listMountainAreaTopics.filter((topic) => {
-    return topic.Id === TopicRIDs[0];
-  })[0].TypeDesc[this.language];
+  // const topicText = this.listMountainAreaTopics.filter((topic) => {
+  //   return topic.Id === TopicRIDs[0];
+  // })[0].TypeDesc[this.language];
 
   return html` <div class="details">
     <div class="header">
@@ -32,7 +34,8 @@ export function render_details() {
           url: `http://www.google.com/maps/place/${Latitude},${Longitude}`,
         }}"
         .closeModalAction="${() => {
-          this.detailsOpen = false;
+          this.detailsSkiAreaOpen = false;
+          this.detailsActivityOpen = false;
         }}"
       ></wc-sidemodal-header>
     </div>

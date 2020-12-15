@@ -3,7 +3,7 @@ import { t } from "../translations";
 import { countFilters, STATE_DEFAULT_FILTERS } from "../utils";
 
 export function render_filters() {
-  let filtersNumber = countFilters(this.filters);
+  let filtersNumber = countFilters(this.poiFilters);
 
   return html` <div class="filters">
     <div class="header">
@@ -14,7 +14,7 @@ export function render_filters() {
         ]}"
         .fCancelFiltersText="${t["cancelFilters"][this.language]}"
         .fCancelFiltersAction="${() => {
-          this.filters = STATE_DEFAULT_FILTERS;
+          this.poiFilters = STATE_DEFAULT_FILTERS;
         }}"
         .closeModalAction="${() => {
           this.filtersOpen = false;
@@ -29,17 +29,17 @@ export function render_filters() {
           <span class="">${t["from"][this.language]}</span>
           <input
             type="date"
-            .value="${this.filters.dateFrom}"
+            .value="${this.poiFilters.dateFrom}"
             @change="${(e) => {
-              this.filters = { ...this.filters, dateFrom: e.target.value };
+              this.poiFilters = { ...this.poiFilters, dateFrom: e.target.value };
             }}"
           />
           <span class="">${t["to"][this.language]}</span>
           <input
             type="date"
-            .value="${this.filters.dateTo}"
+            .value="${this.poiFilters.dateTo}"
             @change="${(e) => {
-              this.filters = { ...this.filters, dateTo: e.target.value };
+              this.poiFilters = { ...this.poiFilters, dateTo: e.target.value };
             }}"
           />
         </div>
@@ -52,8 +52,8 @@ export function render_filters() {
         <div style="margin: 16px;">
           <wc-dropdown
             .value="${{
-              value: this.filters.radius,
-              label: `${this.filters.radius} km`,
+              value: this.poiFilters.radius,
+              label: `${this.poiFilters.radius} km`,
             }}"
             .options="${[
               { value: "0", label: "0 km" },
@@ -62,7 +62,7 @@ export function render_filters() {
               { value: "15", label: "15 km" },
             ]}"
             .action="${({ value }) => {
-              this.filters = { ...this.filters, radius: value };
+              this.poiFilters = { ...this.poiFilters, radius: value };
             }}"
           ></wc-dropdown>
         </div>
@@ -77,12 +77,12 @@ export function render_filters() {
         ${this.listMountainAreaTopics.map((o) => {
           return html`
             <wc-checkbox
-              .value="${o.Bitmask === parseInt(this.filters.topic)}"
+              .value="${o.Bitmask === parseInt(this.poiFilters.topic)}"
               .action="${({ value, name }) => {
                 if (value) {
-                  this.filters = { ...this.filters, topic: o.Bitmask };
+                  this.poiFilters = { ...this.poiFilters, topic: o.Bitmask };
                 } else {
-                  this.filters = { ...this.filters, topic: "" };
+                  this.poiFilters = { ...this.poiFilters, topic: "" };
                 }
               }}"
               .label="${o.TypeDesc[this.language]}"

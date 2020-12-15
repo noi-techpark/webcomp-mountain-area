@@ -3,10 +3,12 @@ import leaflet_mrkcls from "leaflet.markercluster";
 import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 import {
-  requestTourismMountainArea,
-  requestTourismEventDetails,
+  requestSkiAreaDetails,
+  requestTourismSkiArea,
+  requestTourismODHActivityPoiType2,
 } from "../api/mountainArea";
 import pinSnow from "../assets/pin-snow.svg";
+import pinSki from "../assets/pin-ski.svg";
 import user__marker from "../assets/user.svg";
 import { getLatLongFromStationDetail, get_system_language } from "../utils";
 
@@ -54,7 +56,7 @@ export function drawUserOnMap() {
   const circle = Leaflet.circle(
     [this.currentLocation.lat, this.currentLocation.lng],
     {
-      radius: parseInt(this.filters.radius) * 1000,
+      radius: parseInt(this.poiFilters.radius) * 1000,
       color: "rgba(66, 133, 244, 0.6)",
       fillColor: "rgba(66, 133, 244, 0.5)",
       weight: 1,
@@ -68,20 +70,28 @@ export function drawUserOnMap() {
 }
 
 export async function drawMountainAreaOnMap() {
-  const mountainArea_layer_array = [];
+  const skiArea_layer_array = [];
+  const activities_layer_array = [];
 
-  const mountainArea = await requestTourismMountainArea(
-    this.filters,
+  const skiAreas = await requestTourismSkiArea(
+    this.poiFilters,
     this.currentLocation
   );
 
-  mountainArea.map((event) => {
+  const activities = await requestTourismODHActivityPoiType2(
+    this.poiFilters,
+    this.currentLocation
+  );
+  console.log(activities);
+
+  // Ski Areas
+  skiAreas.map((skiArea) => {
     const marker_position = getLatLongFromStationDetail({
-      x: event.Longitude,
-      y: event.Latitude,
+      x: skiArea.Longitude,
+      y: skiArea.Latitude,
     });
     const mountainArea_icon = Leaflet.icon({
-      iconUrl: pinSnow,
+      iconUrl: pinSki,
       iconSize: [36, 36],
     });
     const marker = Leaflet.marker([marker_position.lat, marker_position.lng], {
@@ -89,32 +99,99 @@ export async function drawMountainAreaOnMap() {
     });
 
     const action = async () => {
-      const details = await requestTourismEventDetails({
-        Id: event.Id,
+      const details = await requestSkiAreaDetails({
+        Id: skiArea.Id,
       });
       if (details) {
         console.log(details);
 
-        this.currentEvent = {
+        this.currentSkiArea = {
           ...details,
         };
       }
 
       this.filtersOpen = false;
-      this.detailsOpen = true;
+      this.detailsActivityOpen = false;
+      this.detailsSkiAreaOpen = true;
     };
 
     marker.on("mousedown", action);
-    mountainArea_layer_array.push(marker);
+    skiArea_layer_array.push(marker);
   });
 
   if (!this.language) {
     this.language = get_system_language();
   }
 
-  const mountainArea_layer = Leaflet.layerGroup(mountainArea_layer_array, {});
+  const mountainArea_layer = Leaflet.layerGroup(skiArea_layer_array, {});
 
-  this.layer_mountainArea = new leaflet_mrkcls.MarkerClusterGroup({
+  // this.layer_mountainArea = new leaflet_mrkcls.MarkerClusterGroup({
+  //   showCoverageOnHover: false,
+  //   chunkedLoading: true,
+  //   iconCreateFunction(cluster) {
+  //     return Leaflet.divIcon({
+  //       html: `<div class="marker_cluster__marker">${cluster.getChildCount()}</div>`,
+  //       iconSize: Leaflet.point(36, 36),
+  //     });
+  //   },
+  // });
+
+  /** Add maker layer in the cluster group */
+  // this.layer_mountainArea.addLayer(mountainArea_layer);
+
+  /** Add the cluster group to the map */
+  // this.map.addLayer(this.layer_mountainArea);
+  this.map.addLayer(mountainArea_layer);
+
+  // Activities
+  activities.map((activity) => {
+    const { GpsInfo } = activity;
+    const position = GpsInfo.filter((o) => {
+      return o.Gpstype === "position";
+    })[0];
+
+    if (position) {
+      const marker_position = getLatLongFromStationDetail({
+        x: position.Longitude,
+        y: position.Latitude,
+      });
+      const activity_icon = Leaflet.icon({
+        iconUrl: pinSnow,
+        iconSize: [36, 36],
+      });
+
+      const marker = Leaflet.marker(
+        [marker_position.lat, marker_position.lng],
+        {
+          icon: activity_icon,
+        }
+      );
+
+      const action = async () => {
+        const details = await requestSkiAreaDetails({
+          Id: activity.Id,
+        });
+        if (details) {
+          console.log(details);
+
+          this.currentActivity = {
+            ...details,
+          };
+        }
+
+        this.filtersOpen = false;
+        this.detailsSkiAreaOpen = false;
+        this.detailsActivityOpen = true;
+      };
+
+      marker.on("mousedown", action);
+      activities_layer_array.push(marker);
+    }
+  });
+
+  const activities_layer = Leaflet.layerGroup(activities_layer_array, {});
+
+  this.layer_activities = new leaflet_mrkcls.MarkerClusterGroup({
     showCoverageOnHover: false,
     chunkedLoading: true,
     iconCreateFunction(cluster) {
@@ -124,8 +201,10 @@ export async function drawMountainAreaOnMap() {
       });
     },
   });
+
   /** Add maker layer in the cluster group */
-  this.layer_mountainArea.addLayer(mountainArea_layer);
+  this.layer_activities.addLayer(activities_layer);
+
   /** Add the cluster group to the map */
-  this.map.addLayer(this.layer_mountainArea);
+  this.map.addLayer(this.layer_activities);
 }

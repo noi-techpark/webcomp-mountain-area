@@ -1,12 +1,9 @@
 import "@babel/polyfill";
 import leafletStyle from "leaflet/dist/leaflet.css";
 import { css, html, LitElement, unsafeCSS } from "lit-element";
-import { requestTourismMountainAreaPaginated } from "./api/mountainArea";
 import { requestGetCoordinatesFromSearch } from "./api/hereMaps";
-import { render_details } from "./components/details";
+import { render_details_skiArea } from "./components/detailsSkiArea";
 import { render_filters } from "./components/filters";
-import { render__list } from "./components/list";
-
 import { render__mapControls } from "./components/mapControls";
 import { render_searchPlaces } from "./components/searchPlaces";
 import { getFilters } from "./mainClassMethods/filters";
@@ -53,15 +50,16 @@ class MountainArea extends LitElement {
     this.hereMapsPlacesFound = [];
     this.hereMapsQuery = "";
 
-    this.currentEvent = {};
+    this.currentSkiArea = {};
 
     this.listMountainArea = [];
     this.listMountainAreaCurrentPage = 1;
 
-    this.detailsOpen = false;
+    this.detailsSkiAreaOpen = false;
+    this.detailsActivityOpen = false;
     this.filtersOpen = false;
 
-    this.filters = STATE_DEFAULT_FILTERS;
+    this.poiFilters = STATE_DEFAULT_FILTERS;
     this.filtersAccordionOpen = STATE_DEFAULT_FILTERS_ACCORDIONS_OPEN;
 
     this.listMountainAreaTopics = [];
@@ -115,7 +113,8 @@ class MountainArea extends LitElement {
   }
 
   handleSearchBarFilterAction = () => {
-    this.detailsOpen = false;
+    this.detailsSkiAreaOpen = false;
+    this.detailsActivityOpen = false;
     this.filtersOpen = !this.filtersOpen;
   };
 
@@ -146,7 +145,11 @@ class MountainArea extends LitElement {
           ${isMobile() ? `mobile` : ``}"
       >
         ${this.isLoading ? html`<div class="globalOverlay"></div>` : ""}
-        ${(isMobile() && !this.detailsOpen && !this.filtersOpen) || !isMobile()
+        ${(isMobile() &&
+          !this.detailsSkiAreaOpen &&
+          !this.detailsActivityOpen &&
+          !this.filtersOpen) ||
+        !isMobile()
           ? html`<div class="mountainArea__language_picker">
               <wc-languagepicker
                 .supportedLanguages="${LANGUAGES}"
@@ -164,9 +167,14 @@ class MountainArea extends LitElement {
             ${render_searchPlaces.bind(this)()}
           </div>
 
-          ${this.detailsOpen
+          ${this.detailsSkiAreaOpen
             ? html`<div class="mountainArea__sideBar__details mt-4px">
-                ${render_details.bind(this)()}
+                ${render_details_skiArea.bind(this)()}
+              </div>`
+            : ""}
+          ${this.detailsActivityOpen
+            ? html`<div class="mountainArea__sideBar__details mt-4px">
+                ${render_details_activity.bind(this)()}
               </div>`
             : ""}
           ${this.filtersOpen

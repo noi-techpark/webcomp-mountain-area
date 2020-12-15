@@ -1,8 +1,8 @@
 import { html } from "lit-element";
+import findPositionBlueIcon from "../assets/find-position-blue.svg";
 // import { debounce, request__get_coordinates_from_search } from "../utils";
 import { t } from "../translations";
-import findPositionBlueIcon from "../assets/find-position-blue.svg";
-import { countFilters, STATE_MODALITIES } from "../utils";
+import { countFilters } from "../utils";
 
 export function render_searchPlaces() {
   const handle_onchange = (value) => {
@@ -17,7 +17,7 @@ export function render_searchPlaces() {
 
   const manage_map = (lat, lng) => {
     this.currentLocation = { lat: parseFloat(lat), lng: parseFloat(lng) };
-    this.currentEvent = {};
+    this.currentSkiArea = {};
     this.hereMapsPlacesFound = [];
     this.filtersOpen = false;
     this.map.flyTo([lat, lng], 15);
@@ -87,7 +87,7 @@ export function render_searchPlaces() {
     `;
   };
 
-  let filtersNumber = countFilters(this.filters);
+  let filtersNumber = countFilters(this.poiFilters);
 
   return html`
     <div class="searchBox">

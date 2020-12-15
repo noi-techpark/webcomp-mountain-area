@@ -8,9 +8,6 @@ export const LANGUAGES = {
 
 export const STATE_DEFAULT_FILTERS = {
   radius: "0",
-  dateFrom: "",
-  dateTo: "",
-  topic: "",
 };
 
 export const STATE_DEFAULT_FILTERS_ACCORDIONS_OPEN = {};
@@ -64,14 +61,6 @@ export function getLatLongFromStationDetail(o) {
 export function countFilters(filters) {
   let filtersNumber = 0;
   if (filters.radius !== "0") {
-    filtersNumber = filtersNumber + 1;
-  }
-
-  if (filters.dateFrom.length || filters.dateTo.length) {
-    filtersNumber = filtersNumber + 1;
-  }
-
-  if (filters.topic !== "") {
     filtersNumber = filtersNumber + 1;
   }
 

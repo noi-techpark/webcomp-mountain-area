@@ -1,39 +1,24 @@
 import {
-  BASE_PATH_TOURISM_EVENT,
-  BASE_PATH_TOURISM_EVENTTOPICS,
-  BASE_PATH_TOURISM_EVENTTYPES,
-  BASE_PATH_TOURISM_EVENT_REDUCED,
+  BASE_PATH_TOURISM_ODHACTIVITYPOI_REDUCED,
+  BASE_PATH_TOURISM_SKIAREA,
 } from "./config";
 
 const createUrlFilters = (filters, currentLocation) => {
-  let dateFromFilter = "";
-  if (filters.dateFrom.length) {
-    dateFromFilter = `&begindate=${filters.dateFrom}`;
-  }
-  let dateToFilter = "";
-  if (filters.dateTo.length) {
-    dateToFilter = `&enddate=${filters.dateTo}`;
-  }
-  let topicFilter = "";
-  if (filters.topic !== "") {
-    topicFilter = `&topicfilter=${filters.topic}`;
-  }
-  let radius = "";
-  if (filters.radius && filters.radius !== "0") {
-    radius = `&latitude=${currentLocation.lat}&longitude=${
-      currentLocation.lng
-    }&radius=${parseInt(filters.radius) * 1000}`;
-  }
-  return `${dateFromFilter}${dateToFilter}${topicFilter}${radius}`;
+  // let dateFromFilter = "";
+  // if (filters.dateFrom.length) {
+  //   dateFromFilter = `&begindate=${filters.dateFrom}`;
+  // }
+  return ``;
 };
 
-export const requestTourismMountainArea = async (filters, currentLocation) => {
+export const requestTourismSkiArea = async (filters, currentLocation) => {
   try {
     const request = await fetch(
-      `${BASE_PATH_TOURISM_EVENT_REDUCED}?active=true&odhactive=true&fields=Id,Latitude,Longitude${createUrlFilters(
+      // `${BASE_PATH_TOURISM_SKIAREA}?active=true&odhactive=true&fields=Id,Latitude,Longitude${createUrlFilters(
+      `${BASE_PATH_TOURISM_SKIAREA}${createUrlFilters(
         filters,
         currentLocation
-      )}`
+      )}?elements=0&fields=Id,Latitude,Longitude`
     );
     if (request.status !== 200) {
       throw new Error(request.statusText);
@@ -45,15 +30,20 @@ export const requestTourismMountainArea = async (filters, currentLocation) => {
   }
 };
 
-export const requestTourismMountainAreaPaginated = async (
+/**
+ * Get all the activity of type 2: skilifts, cross-country skiing, snowparks, ...
+ *
+ * @param {*} filters
+ * @param {*} currentLocation
+ * @returns
+ */
+export const requestTourismODHActivityPoiType2 = async (
   filters,
-  currentLocation,
-  pageNumber,
-  language
+  currentLocation
 ) => {
   try {
     const request = await fetch(
-      `${BASE_PATH_TOURISM_EVENT}?active=true&odhactive=true&language=${language}&fields=Id,Detail,CategoryCodes,LocationInfo&pagenumber=${pageNumber}&pagesize=10${createUrlFilters(
+      `${BASE_PATH_TOURISM_ODHACTIVITYPOI_REDUCED}?type=2&fields=GpsInfo${createUrlFilters(
         filters,
         currentLocation
       )}`
@@ -68,22 +58,24 @@ export const requestTourismMountainAreaPaginated = async (
   }
 };
 
-export const requestTourismMountainAreaCodes = async () => {
-  try {
-    const request = await fetch(`${BASE_PATH_TOURISM_EVENTTOPICS}`);
-    if (request.status !== 200) {
-      throw new Error(request.statusText);
-    }
-    const response = await request.json();
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
-};
+// export const requestTourismMountainAreaCodes = async () => {
+//   try {
+//     const request = await fetch(`${BASE_PATH_TOURISM_ACTIVITYTYPES}`);
+//     if (request.status !== 200) {
+//       throw new Error(request.statusText);
+//     }
+//     const response = await request.json();
+//     return response;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
-export const requestTourismEventDetails = async ({ Id }) => {
+export const requestSkiAreaDetails = async ({ Id }) => {
   try {
-    const request = await fetch(`${BASE_PATH_TOURISM_EVENT}/${Id}`);
+    const request = await fetch(
+      `${BASE_PATH_TOURISM_SKIAREA}/${Id}?elements=0`
+    );
     if (request.status !== 200) {
       throw new Error(request.statusText);
     }
