@@ -211,4 +211,35 @@ export const t = {
     en: "to",
     de: "zu",
   },
+  opening: {
+    it: "Apertura",
+    en: "Opening",
+    de: "Öffnung",
+  },
+  slopeInfo: {
+    it: "Informazioni sulle piste",
+    en: "Slope info",
+    de: "Pisteninfo",
+  },
+
+  totalKilometers: {
+    it: "Chilometri totali",
+    en: "Total Kilometers",
+    de: "Gesamtkilometer",
+  },
+  kilometersBlue: {
+    it: "Chilometri blu",
+    en: "Kilometers Blue",
+    de: "Kilometer blau",
+  },
+  kilometersRed: {
+    it: "Chilometri rossi",
+    en: "Kilometers Red",
+    de: "Kilometers Rot",
+  },
+  kilometersBlack: {
+    it: "Chilometri neri",
+    en: "Kilometers Black",
+    de: "Kilometer schwarz",
+  },
 };
