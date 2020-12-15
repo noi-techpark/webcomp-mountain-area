@@ -242,4 +242,9 @@ export const t = {
     en: "Kilometers Black",
     de: "Kilometer schwarz",
   },
+  directions: {
+    it: "Indicazioni stradali",
+    en: "Directions",
+    de: "Richtungen",
+  },
 };

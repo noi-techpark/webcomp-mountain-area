@@ -174,7 +174,7 @@ export async function drawMountainAreaOnMap() {
         }
         console.log(this.map._zoom);
 
-        STORE_zoomLevel = 14;
+        STORE_zoomLevel = this.map._zoom + 2;
         STORE_position = [marker_position.lat, marker_position.lng];
 
         this.map.setView(

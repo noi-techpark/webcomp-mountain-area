@@ -1,5 +1,7 @@
 import dayjs from "dayjs";
 import { html } from "lit-element";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
+
 import { SIDE_MODAL_ROW_TYPES } from "../shared_components/sideModalRow/sideModalRow";
 import { t } from "../translations";
 
@@ -7,23 +9,21 @@ export function render_details_activity() {
   // console.log(this.currentActivity);
 
   const { Detail, Latitude, Longitude } = this.currentActivity;
-  console.log(this.currentActivity);
 
   // const { TopicRIDs, LocationInfo } = this.currentActivity;
   // const { DateBegin, DateEnd } = this.currentActivity;
-  // const { ContactInfos, OrganizerInfos } = this.currentActivity;
+  const { ContactInfos } = this.currentActivity;
 
-  const { Title, BaseText } = Detail[this.language];
+  const { Title, BaseText, GetThereText, AdditionalText } = Detail[
+    this.language
+  ];
+  console.log(GetThereText);
   // // ContactInfos
-  // const { Address, City, CompanyName, CountryCode, CountryName } = ContactInfos[
-  //   this.language
-  // ];
-  // const { Email, Faxnumber } = ContactInfos[this.language];
-  // const { Phonenumber, Url, ZipCode } = ContactInfos[this.language];
-
-  // const topicText = this.listMountainAreaTopics.filter((topic) => {
-  //   return topic.Id === TopicRIDs[0];
-  // })[0].TypeDesc[this.language];
+  const { Address, City, CompanyName, CountryCode, CountryName } = ContactInfos[
+    this.language
+  ];
+  const { Email, Faxnumber } = ContactInfos[this.language];
+  const { Phonenumber, Url, ZipCode } = ContactInfos[this.language];
 
   return html`
     <div class="details">
@@ -55,7 +55,82 @@ export function render_details_activity() {
           ? html`<wc-sidemodal-row
               .type="${SIDE_MODAL_ROW_TYPES.vertical}"
               .title="${t["description"][this.language]}"
-              .text="${BaseText}"
+              .text="${html`${unsafeHTML(BaseText)}`}"
+            ></wc-sidemodal-row>`
+          : null}
+        ${GetThereText
+          ? html`<wc-sidemodal-row
+              .type="${SIDE_MODAL_ROW_TYPES.vertical}"
+              .title="${t["directions"][this.language]}"
+              .text="${html`${unsafeHTML(GetThereText)}`}"
+            ></wc-sidemodal-row>`
+          : null}
+        ${AdditionalText
+          ? html`<wc-sidemodal-row
+              .type="${SIDE_MODAL_ROW_TYPES.vertical}"
+              .title="${t["directions"][this.language]}"
+              .text="${html`${unsafeHTML(AdditionalText)}`}"
+            ></wc-sidemodal-row>`
+          : null}
+      </div>
+
+      <div>
+        <wc-divider></wc-divider>
+      </div>
+
+      <div>
+        <wc-divider></wc-divider>
+      </div>
+      <div>
+        <div>
+          <p class="caption space">
+            ${t["contactInfo"][this.language].toUpperCase()}
+          </p>
+        </div>
+        ${CompanyName
+          ? html`<wc-sidemodal-row
+              .type="${SIDE_MODAL_ROW_TYPES.vertical}"
+              .title="${t["organizer"][this.language]}"
+              .text="${CompanyName}"
+            ></wc-sidemodal-row>`
+          : null}
+        ${Address || City || CountryName || CountryCode
+          ? html`<wc-sidemodal-row
+              .type="${SIDE_MODAL_ROW_TYPES.vertical}"
+              .title="${t["address"][this.language]}"
+              .text="${Address} ${City} ${CountryName} ${CountryCode}"
+            ></wc-sidemodal-row>`
+          : null}
+        ${ZipCode
+          ? html`<wc-sidemodal-row
+              .type="${SIDE_MODAL_ROW_TYPES.vertical}"
+              .title="${t["place"][this.language]}"
+              .text="${ZipCode}"
+            ></wc-sidemodal-row>`
+          : null}
+        ${Phonenumber || Faxnumber
+          ? html`<wc-sidemodal-row
+              .type="${SIDE_MODAL_ROW_TYPES.vertical}"
+              .title="${t["telFax"][this.language]}"
+              .text="${Phonenumber || "---"} / ${Faxnumber || "---"}"
+            ></wc-sidemodal-row>`
+          : null}
+        ${Email
+          ? html`<wc-sidemodal-row
+              .type="${SIDE_MODAL_ROW_TYPES.vertical}"
+              .title="${t["eMail"][this.language]}"
+              .text="${html`${unsafeHTML(
+                `<a href="mailto:${Email}">${Email}</a>`
+              )}`}"
+            ></wc-sidemodal-row>`
+          : null}
+        ${Url
+          ? html`<wc-sidemodal-row
+              .type="${SIDE_MODAL_ROW_TYPES.vertical}"
+              .title="${t["web"][this.language]}"
+              .text="${html`${unsafeHTML(
+                `<a target="_blank" href="${Url}">${Url}</a>`
+              )}`}"
             ></wc-sidemodal-row>`
           : null}
       </div>
@@ -63,50 +138,6 @@ export function render_details_activity() {
   `;
 
   return html` <div class="details">
-    <div>
-      <div>
-        <p class="caption space">
-          ${t["information"][this.language].toUpperCase()}
-        </p>
-      </div>
-      ${BaseText
-        ? html`<wc-sidemodal-row
-            .type="${SIDE_MODAL_ROW_TYPES.vertical}"
-            .title="${t["description"][this.language]}"
-            .text="${BaseText}"
-          ></wc-sidemodal-row>`
-        : null}
-      ${LocationInfo.TvInfo.Name[this.language]
-        ? html`<wc-sidemodal-row
-            .type="${SIDE_MODAL_ROW_TYPES.vertical}"
-            .title="${t["where"][this.language]}"
-            .text="${LocationInfo.TvInfo.Name[this.language]}"
-          ></wc-sidemodal-row>`
-        : null}
-    </div>
-
-    <div>
-      <wc-divider></wc-divider>
-    </div>
-    <div>
-      <div>
-        <p class="caption space">${t["dates"][this.language].toUpperCase()}</p>
-      </div>
-      ${DateBegin
-        ? html`<wc-sidemodal-row
-            .type="${SIDE_MODAL_ROW_TYPES.horizontal}"
-            .title="${t["startDate"][this.language]}"
-            .text="${dayjs(DateBegin).format("DD/MM/YYYY")}"
-          ></wc-sidemodal-row>`
-        : null}
-      ${DateEnd
-        ? html`<wc-sidemodal-row
-            .type="${SIDE_MODAL_ROW_TYPES.horizontal}"
-            .title="${t["endDate"][this.language]}"
-            .text="${dayjs(DateEnd).format("DD/MM/YYYY")}"
-          ></wc-sidemodal-row>`
-        : null}
-    </div>
     <div>
       <wc-divider></wc-divider>
     </div>

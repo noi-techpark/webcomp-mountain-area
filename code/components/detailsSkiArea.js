@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { html } from "lit-element";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 import { SIDE_MODAL_ROW_TYPES } from "../shared_components/sideModalRow/sideModalRow";
 import { t } from "../translations";
 
@@ -107,14 +108,18 @@ ${dayjs(element.Start).format("DD/MM/YYYY")} - ${dayjs(element.Stop).format(
           ? html`<wc-sidemodal-row
               .type="${SIDE_MODAL_ROW_TYPES.vertical}"
               .title="${t["eMail"][this.language]}"
-              .text="${Email}"
+              .text="${html`${unsafeHTML(
+                `<a href="mailto:${Email}">${Email}</a>`
+              )}`}"
             ></wc-sidemodal-row>`
           : null}
         ${Url
           ? html`<wc-sidemodal-row
               .type="${SIDE_MODAL_ROW_TYPES.vertical}"
               .title="${t["web"][this.language]}"
-              .text="${Url}"
+              .text="${html`${unsafeHTML(
+                `<a target="_blank" href="${Url}">${Url}</a>`
+              )}`}"
             ></wc-sidemodal-row>`
           : null}
         <div>
