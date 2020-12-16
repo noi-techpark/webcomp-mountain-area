@@ -247,4 +247,36 @@ export const t = {
     en: "Directions",
     de: "Richtungen",
   },
+
+  difficulty: {
+    it: "Difficoltà",
+    en: "Difficulty",
+    de: "Schwierigkeit",
+  },
+  duration: {
+    it: "Durata",
+    en: "Duration",
+    de: "Dauer",
+  },
+  distance: {
+    it: "Distanza",
+    en: "Distance",
+    de: "Entfernung",
+  },
+  open: {
+    it: "Aperto",
+    en: "Open",
+    de: "Öffnen",
+  },
+
+  yes: {
+    it: "Sì",
+    en: "Yes",
+    de: "Ja",
+  },
+  no: {
+    it: "No",
+    en: "No",
+    de: "Nein",
+  },
 };

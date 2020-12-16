@@ -6,19 +6,22 @@ import { SIDE_MODAL_ROW_TYPES } from "../shared_components/sideModalRow/sideModa
 import { t } from "../translations";
 
 export function render_details_activity() {
-  // console.log(this.currentActivity);
-
   const { Detail, Latitude, Longitude } = this.currentActivity;
-
-  // const { TopicRIDs, LocationInfo } = this.currentActivity;
-  // const { DateBegin, DateEnd } = this.currentActivity;
-  const { ContactInfos } = this.currentActivity;
+  const {
+    ContactInfos,
+    Ratings,
+    DistanceLength,
+    DistanceDuration,
+  } = this.currentActivity;
+  const { IsOpen } = this.currentActivity;
 
   const { Title, BaseText, GetThereText, AdditionalText } = Detail[
     this.language
   ];
+
   console.log(GetThereText);
-  // // ContactInfos
+
+  // ContactInfos
   const { Address, City, CompanyName, CountryCode, CountryName } = ContactInfos[
     this.language
   ];
@@ -76,6 +79,45 @@ export function render_details_activity() {
 
       <div>
         <wc-divider></wc-divider>
+      </div>
+
+      <div>
+        <div>
+          <p class="caption space">
+            ${t["details"][this.language].toUpperCase()}
+          </p>
+        </div>
+
+        ${Ratings.Difficulty
+          ? html`<wc-sidemodal-row
+              .type="${SIDE_MODAL_ROW_TYPES.horizontal}"
+              .title="${t["difficulty"][this.language]}"
+              .text="${Ratings.Difficulty}"
+            ></wc-sidemodal-row>`
+          : null}
+        ${DistanceLength
+          ? html`<wc-sidemodal-row
+              .type="${SIDE_MODAL_ROW_TYPES.horizontal}"
+              .title="${t["duration"][this.language]}"
+              .text="${DistanceLength} m"
+            ></wc-sidemodal-row>`
+          : null}
+        ${DistanceDuration
+          ? html`<wc-sidemodal-row
+              .type="${SIDE_MODAL_ROW_TYPES.horizontal}"
+              .title="${t["duration"][this.language]}"
+              .text="${DistanceDuration} (hh:mm)"
+            ></wc-sidemodal-row>`
+          : null}
+        ${IsOpen !== undefined
+          ? html`<wc-sidemodal-row
+              .type="${SIDE_MODAL_ROW_TYPES.horizontal}"
+              .title="${t["duration"][this.language]}"
+              .text="${IsOpen
+                ? t["yes"][this.language]
+                : t["no"][this.language]}"
+            ></wc-sidemodal-row>`
+          : null}
       </div>
 
       <div>
