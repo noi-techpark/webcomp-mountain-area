@@ -7,12 +7,8 @@ import { t } from "../translations";
 
 export function render_details_activity() {
   const { Detail, Latitude, Longitude } = this.currentActivity;
-  const {
-    ContactInfos,
-    Ratings,
-    DistanceLength,
-    DistanceDuration,
-  } = this.currentActivity;
+  const { ContactInfos, Ratings } = this.currentActivity;
+  const { SmgTags, DistanceLength, DistanceDuration } = this.currentActivity;
   const { IsOpen } = this.currentActivity;
 
   const { Title, BaseText, GetThereText, AdditionalText } = Detail[
@@ -34,7 +30,7 @@ export function render_details_activity() {
         <wc-sidemodal-header
           .type="title"
           .tTitle="${Title}"
-          .tLinkedTagText="${"..."}"
+          .tLinkedTagText="${SmgTags[0]}"
           .tOptionalLink="${{
             text: t["directions"][this.language],
             url: `http://www.google.com/maps/place/${Latitude},${Longitude}`,
@@ -88,7 +84,7 @@ export function render_details_activity() {
           </p>
         </div>
 
-        ${Ratings.Difficulty
+        ${Ratings && Ratings.Difficulty
           ? html`<wc-sidemodal-row
               .type="${SIDE_MODAL_ROW_TYPES.horizontal}"
               .title="${t["difficulty"][this.language]}"

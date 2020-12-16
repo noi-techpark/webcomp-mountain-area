@@ -4,6 +4,7 @@ import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 import {
   requestActivityDetails,
+  requestGPX,
   requestSkiAreaDetails,
   requestTourismODHActivityPoiType2,
   requestTourismSkiArea,
@@ -79,6 +80,15 @@ export function drawUserOnMap() {
   this.layer_user.addTo(this.map);
 }
 
+function drawTrack(track) {
+  this.trackPolyline = Leaflet.polyline(track, {
+    weight: 3,
+    color: "blue",
+  }).addTo(this.map);
+
+  this.map.fitBounds(this.trackPolyline.getBounds());
+}
+
 export async function drawMountainAreaOnMap() {
   const skiArea_layer_array = [];
   const activities_layer_array = [];
@@ -113,8 +123,6 @@ export async function drawMountainAreaOnMap() {
         Id: skiArea.Id,
       });
       if (details) {
-        console.log(details);
-
         this.currentSkiArea = {
           ...details,
         };
@@ -167,24 +175,46 @@ export async function drawMountainAreaOnMap() {
           Id: activity.Id,
         });
         if (details) {
-          console.log(details);
+          console.log(details, details.GpsTrack);
+          // If the activity has a GpsTrack show it
+          if (details.GpsTrack.length) {
+            const gpx = await requestGPX({
+              code: details.GpsTrack[0].GpxTrackUrl.split("/gpx/").pop(),
+            });
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(gpx, "text/xml");
+            const latlngs = Array.from(
+              xmlDoc.getElementsByTagName("trkpt")
+            ).map((t) => {
+              const lat = t.attributes.getNamedItem("lat").value;
+              const lon = t.attributes.getNamedItem("lon").value;
+              return [lat, lon];
+            });
+            if (this.trackPolyline) {
+              this.trackPolyline.remove(this.map);
+            }
+            drawTrack.bind(this)(latlngs);
+          } else {
+            // Else show the normal POI
+            if (STORE_zoomLevel < 16) {
+              STORE_zoomLevel = this.map._zoom + 2;
+            }
+            STORE_position = [marker_position.lat, marker_position.lng];
+
+            this.map.setView(
+              [marker_position.lat, marker_position.lng],
+              STORE_zoomLevel
+            );
+          }
+
           this.currentActivity = {
             ...details,
           };
+
+          this.filtersOpen = false;
+          this.detailsSkiAreaOpen = false;
+          this.detailsActivityOpen = true;
         }
-        console.log(this.map._zoom);
-
-        STORE_zoomLevel = this.map._zoom + 2;
-        STORE_position = [marker_position.lat, marker_position.lng];
-
-        this.map.setView(
-          [marker_position.lat, marker_position.lng],
-          STORE_zoomLevel
-        );
-
-        this.filtersOpen = false;
-        this.detailsSkiAreaOpen = false;
-        this.detailsActivityOpen = true;
       };
 
       marker.on("mousedown", action);

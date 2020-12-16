@@ -87,3 +87,18 @@ export const requestActivityDetails = async ({ Id }) => {
     console.log(error);
   }
 };
+
+export const requestGPX = async ({ code }) => {
+  try {
+    const request = await fetch(
+      `https://tourism.opendatahub.bz.it/api/Activity/Gpx/${code}`
+    );
+    if (request.status !== 200) {
+      throw new Error(request.statusText);
+    }
+    const response = await request.text();
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
