@@ -15,7 +15,6 @@ const createUrlFilters = (filters, currentLocation) => {
 export const requestTourismSkiArea = async (filters, currentLocation) => {
   try {
     const request = await fetch(
-      // `${BASE_PATH_TOURISM_SKIAREA}?active=true&odhactive=true&fields=Id,Latitude,Longitude${createUrlFilters(
       `${BASE_PATH_TOURISM_SKIAREA}${createUrlFilters(
         filters,
         currentLocation

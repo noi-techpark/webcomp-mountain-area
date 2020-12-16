@@ -3,6 +3,10 @@ export const observedProperties = {
   width: { type: String },
   fontFamily: { type: String },
   language: { type: String },
+
+  mobileOpen: { type: Boolean },
+  isMobile: { type: Boolean },
+
   tiles_url: { type: String, attribute: "tiles-url" },
 
   isLoading: { type: Boolean },
