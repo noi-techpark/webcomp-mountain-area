@@ -4,6 +4,7 @@ import { css, html, LitElement, unsafeCSS } from "lit-element";
 import { classMap } from "lit-html/directives/class-map";
 import { debounce as _debounce } from "lodash";
 import { requestGetCoordinatesFromSearch } from "./api/hereMaps";
+import { requestWeather } from "./api/weather";
 import { render_details_activity } from "./components/detailsActivity";
 import { render_details_skiArea } from "./components/detailsSkiArea";
 import { render_filters } from "./components/filters";
@@ -58,6 +59,8 @@ class MountainArea extends LitElement {
 
     this.currentSkiArea = {};
 
+    this.weather = {};
+
     this.detailsSkiAreaOpen = false;
     this.detailsActivityOpen = false;
     this.filtersOpen = false;
@@ -108,6 +111,7 @@ class MountainArea extends LitElement {
 
   async firstUpdated() {
     await getFilters.bind(this)();
+    this.weather = await requestWeather.bind(this)(this.language);
     initializeMap.bind(this)();
     drawUserOnMap.bind(this)();
     await drawMountainAreaOnMap.bind(this)();
@@ -152,6 +156,8 @@ class MountainArea extends LitElement {
   );
 
   render() {
+    console.log(this.weather);
+
     return html`
       <style>
         * {

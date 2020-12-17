@@ -5,6 +5,9 @@ import { html } from "lit-element";
 import { t } from "../translations";
 
 export function render_weatherReport() {
+  const { Conditions } = this.weather;
+  console.log(Conditions);
+
   return html`
     <div class="details">
       <div class="header">

@@ -304,4 +304,9 @@ export const t = {
     en: "Download the bulletin",
     de: "Laden Sie das Bulletin herunter",
   },
+  evolution: {
+    it: "Evoluzione",
+    en: "Evolution",
+    de: "Evolution",
+  },
 };

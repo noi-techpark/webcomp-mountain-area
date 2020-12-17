@@ -52,7 +52,7 @@ export function render__mapControls() {
           @click="${() => {
             this.detailsSkiAreaOpen = false;
             this.detailsActivityOpen = false;
-            this.weatherReportOpen = true;
+            this.weatherReportOpen = !this.weatherReportOpen;
           }}"
           type="square"
           .image="${sunCloudImage}"

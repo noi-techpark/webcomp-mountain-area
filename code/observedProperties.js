@@ -21,6 +21,8 @@ export const observedProperties = {
   listWinterActivitiesTypes: { type: Array },
   listSkiAreas: { type: Array },
 
+  weather: { type: Object },
+
   detailsSkiAreaOpen: { type: Boolean },
   detailsActivityOpen: { type: Boolean },
   weatherReportOpen: { type: Boolean },
