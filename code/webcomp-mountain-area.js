@@ -9,6 +9,7 @@ import { render_details_skiArea } from "./components/detailsSkiArea";
 import { render_filters } from "./components/filters";
 import { render__mapControls } from "./components/mapControls";
 import { render_searchPlaces } from "./components/searchPlaces";
+import { render_weatherReport } from "./components/weatherReport";
 import { getFilters } from "./mainClassMethods/filters";
 import {
   drawMountainAreaOnMap,
@@ -27,6 +28,7 @@ import "./shared_components/sideModalHeader/sideModalHeader";
 import "./shared_components/sideModalRow/sideModalRow";
 import "./shared_components/sideModalTabs/sideModalTabs";
 import "./shared_components/tag/tag";
+import { t } from "./translations";
 import {
   isMobile,
   LANGUAGES,
@@ -34,7 +36,6 @@ import {
   STATE_DEFAULT_FILTERS_ACCORDIONS_OPEN,
 } from "./utils";
 import ParkingStyle from "./webcomp-mountain-area.scss";
-import { t } from "./translations";
 
 class MountainArea extends LitElement {
   constructor() {
@@ -60,6 +61,7 @@ class MountainArea extends LitElement {
     this.detailsSkiAreaOpen = false;
     this.detailsActivityOpen = false;
     this.filtersOpen = false;
+    this.weatherReportOpen = false;
 
     this.poiFilters = STATE_DEFAULT_FILTERS;
     this.filtersAccordionOpen = STATE_DEFAULT_FILTERS_ACCORDIONS_OPEN;
@@ -201,6 +203,11 @@ class MountainArea extends LitElement {
                 ${render_searchPlaces.bind(this)()}
               </div>
 
+              ${this.weatherReportOpen
+                ? html`<div class="mountainArea__sideBar__details mt-4px">
+                    ${render_weatherReport.bind(this)()}
+                  </div>`
+                : ""}
               ${this.detailsSkiAreaOpen
                 ? html`<div class="mountainArea__sideBar__details mt-4px">
                     ${render_details_skiArea.bind(this)()}

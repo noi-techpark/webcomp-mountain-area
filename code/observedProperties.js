@@ -23,6 +23,7 @@ export const observedProperties = {
 
   detailsSkiAreaOpen: { type: Boolean },
   detailsActivityOpen: { type: Boolean },
+  weatherReportOpen: { type: Boolean },
   filtersOpen: { type: Boolean },
 
   // Filters

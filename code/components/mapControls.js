@@ -4,6 +4,7 @@ import minimizeImage from "../assets/minimize.svg";
 import findPositionImage from "../assets/find-position.svg";
 import minusImage from "../assets/minus.svg";
 import plusImage from "../assets/plus.svg";
+import sunCloudImage from "../assets/sun-cloud.svg";
 import { drawUserOnMap } from "../mainClassMethods/map";
 import { getCurrentPosition, isMobile, STATE_MODALITIES } from "../utils";
 
@@ -46,6 +47,17 @@ export function render__mapControls() {
             ></wc-button>
           </div>`
         : ""}
+      <div class="mt-16px">
+        <wc-button
+          @click="${() => {
+            this.detailsSkiAreaOpen = false;
+            this.detailsActivityOpen = false;
+            this.weatherReportOpen = true;
+          }}"
+          type="square"
+          .image="${sunCloudImage}"
+        ></wc-button>
+      </div>
       <div class="mt-16px">
         <wc-button
           @click="${handleBtnCenterMap}"

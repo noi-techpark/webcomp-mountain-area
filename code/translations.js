@@ -289,4 +289,19 @@ export const t = {
     en: "Show only open and available activities",
     de: "Nur offene und verfügbare Aktivitäten anzeigen",
   },
+  forecasts: {
+    it: "Previsioni",
+    en: "Forecasts",
+    de: "Prognosen",
+  },
+  weatherReport: {
+    it: "Bollettino metereologico",
+    en: "Weather report",
+    de: "Wetterbericht",
+  },
+  downloadTheBulletin: {
+    it: "Scarica il bollettino",
+    en: "Download the bulletin",
+    de: "Laden Sie das Bulletin herunter",
+  },
 };
