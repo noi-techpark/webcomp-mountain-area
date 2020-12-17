@@ -36,8 +36,6 @@ export async function initializeMap() {
     attribution: this.mapAttribution,
   }).addTo(this.map);
 
-  console.log(STORE_zoomLevel);
-
   if (STORE_position.length) {
     this.map.setView(STORE_position, STORE_zoomLevel);
   } else {
@@ -87,14 +85,12 @@ function drawTrack(track, arrivalPoint) {
     color: "#e6040e",
   }).addTo(this.map);
 
-  console.log(arrivalPoint);
-
   const icon_pinRed = Leaflet.icon({
     iconUrl: pinRed,
     iconSize: [36, 36],
   });
 
-  if (arrivalPoint.Latitude && arrivalPoint.Longitude) {
+  if (arrivalPoint && arrivalPoint.Latitude && arrivalPoint.Longitude) {
     const { Latitude, Longitude } = arrivalPoint;
     this.marker_arrivalPoint = Leaflet.marker([Latitude, Longitude], {
       icon: icon_pinRed,
@@ -190,7 +186,6 @@ export async function drawMountainAreaOnMap() {
           Id: activity.Id,
         });
         if (details) {
-          console.log(details, details.GpsTrack);
           // If the activity has a GpsTrack show it
           if (details.GpsTrack.length) {
             const gpx = await requestGPX({

@@ -15,8 +15,6 @@ export function render_details_activity() {
     this.language
   ];
 
-  console.log(GetThereText);
-
   // ContactInfos
   const { Address, City, CompanyName, CountryCode, CountryName } = ContactInfos[
     this.language
