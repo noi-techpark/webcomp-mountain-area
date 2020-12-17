@@ -12,8 +12,6 @@ const renderChevron = (show) =>
 export function render_filters() {
   let filtersNumber = countFilters(this.poiFilters);
 
-  console.log(this.filtersAccordionOpen);
-
   return html` <div class="filters">
     <div class="header">
       <wc-sidemodal-header
@@ -154,7 +152,6 @@ export function render_filters() {
           <wc-checkbox
             .value="${this.poiFilters.isOpen}"
             .action="${({ value }) => {
-              console.log(value);
               this.poiFilters = {
                 ...this.poiFilters,
                 isOpen: value,
