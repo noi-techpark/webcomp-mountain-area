@@ -11,6 +11,7 @@ import {
 } from "../api/mountainArea";
 import pinSki from "../assets/pin-ski.svg";
 import pinSnow from "../assets/pin-snow.svg";
+import pinRed from "../assets/pin.svg";
 import user__marker from "../assets/user.svg";
 import { getLatLongFromStationDetail, get_system_language } from "../utils";
 
@@ -80,11 +81,25 @@ export function drawUserOnMap() {
   this.layer_user.addTo(this.map);
 }
 
-function drawTrack(track) {
+function drawTrack(track, arrivalPoint) {
   this.trackPolyline = Leaflet.polyline(track, {
     weight: 3,
-    color: "blue",
+    color: "#e6040e",
   }).addTo(this.map);
+
+  console.log(arrivalPoint);
+
+  const icon_pinRed = Leaflet.icon({
+    iconUrl: pinRed,
+    iconSize: [36, 36],
+  });
+
+  if (arrivalPoint.Latitude && arrivalPoint.Longitude) {
+    const { Latitude, Longitude } = arrivalPoint;
+    this.marker_arrivalPoint = Leaflet.marker([Latitude, Longitude], {
+      icon: icon_pinRed,
+    }).addTo(this.map);
+  }
 
   this.map.fitBounds(this.trackPolyline.getBounds());
 }
@@ -193,7 +208,10 @@ export async function drawMountainAreaOnMap() {
             if (this.trackPolyline) {
               this.trackPolyline.remove(this.map);
             }
-            drawTrack.bind(this)(latlngs);
+            if (this.marker_arrivalPoint) {
+              this.marker_arrivalPoint.remove(this.map);
+            }
+            drawTrack.bind(this)(latlngs, details.GpsPoints.arrivalpoint);
           } else {
             // Else show the normal POI
             if (STORE_zoomLevel < 16) {
