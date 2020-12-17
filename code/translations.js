@@ -284,4 +284,9 @@ export const t = {
     en: "No",
     de: "Nein",
   },
+  showOnlyOpenAndAvailableActivities: {
+    it: "Mostra solo le attività aperte e disponibili",
+    en: "Show only open and available activities",
+    de: "Nur offene und verfügbare Aktivitäten anzeigen",
+  },
 };

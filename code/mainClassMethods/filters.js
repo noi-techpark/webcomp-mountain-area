@@ -1,3 +1,5 @@
+import { requestODHActivityPoiTypes } from "../api/mountainArea";
+
 export async function getFilters() {
-  // this.listMountainAreaTopics = await requestTourismMountainAreaCodes();
+  this.listWinterActivitiesTypes = await requestODHActivityPoiTypes();
 }

@@ -57,9 +57,6 @@ class MountainArea extends LitElement {
 
     this.currentSkiArea = {};
 
-    this.listMountainArea = [];
-    this.listMountainAreaCurrentPage = 1;
-
     this.detailsSkiAreaOpen = false;
     this.detailsActivityOpen = false;
     this.filtersOpen = false;
@@ -67,7 +64,7 @@ class MountainArea extends LitElement {
     this.poiFilters = STATE_DEFAULT_FILTERS;
     this.filtersAccordionOpen = STATE_DEFAULT_FILTERS_ACCORDIONS_OPEN;
 
-    this.listMountainAreaTopics = [];
+    this.listWinterActivitiesTypes = [];
   }
 
   static get properties() {
@@ -121,7 +118,7 @@ class MountainArea extends LitElement {
       if (propName === "mobileOpen") {
         this.map.invalidateSize();
       }
-      if (propName === "filters" || propName === "language") {
+      if (propName === "poiFilters" || propName === "language") {
         if (this.map) {
           this.map.off();
           this.map.remove();

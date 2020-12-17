@@ -1,9 +1,18 @@
 import { html } from "lit-element";
 import { t } from "../translations";
 import { countFilters, STATE_DEFAULT_FILTERS } from "../utils";
+import iconChevronUp from "../assets/chevron-up.svg";
+import iconChevronDown from "../assets/chevron-down.svg";
+
+const renderChevron = (show) =>
+  show
+    ? html`<img src="${iconChevronUp}" alt="" />`
+    : html`<img src="${iconChevronDown}" alt="" />`;
 
 export function render_filters() {
   let filtersNumber = countFilters(this.poiFilters);
+
+  console.log(this.filtersAccordionOpen);
 
   return html` <div class="filters">
     <div class="header">
@@ -23,27 +32,91 @@ export function render_filters() {
     </div>
 
     <div>
-      <div>
-        <p class="caption">${t["dates"][this.language].toUpperCase()}</p>
-        <div class="filter__text_with_inputs">
-          <span class="">${t["from"][this.language]}</span>
-          <input
-            type="date"
-            .value="${this.poiFilters.dateFrom}"
-            @change="${(e) => {
-              this.poiFilters = { ...this.poiFilters, dateFrom: e.target.value };
-            }}"
-          />
-          <span class="">${t["to"][this.language]}</span>
-          <input
-            type="date"
-            .value="${this.poiFilters.dateTo}"
-            @change="${(e) => {
-              this.poiFilters = { ...this.poiFilters, dateTo: e.target.value };
-            }}"
-          />
-        </div>
-      </div>
+      <p
+        class="caption pointer"
+        @click="${() => {
+          this.filtersAccordionOpen = {
+            ...this.filtersAccordionOpen,
+            activityType: !this.filtersAccordionOpen["activityType"],
+          };
+        }}"
+      >
+        ${t["category"][this.language].toUpperCase()}
+        <span>${renderChevron(this.filtersAccordionOpen["activityType"])}</span>
+      </p>
+      ${this.filtersAccordionOpen["activityType"]
+        ? html` <div class="options_container">
+            ${this.listWinterActivitiesTypes.map((o) => {
+              return html`
+                <wc-checkbox
+                  .value="${o.Bitmask ===
+                  parseInt(this.poiFilters.activityType)}"
+                  .action="${({ value }) => {
+                    if (value) {
+                      this.poiFilters = {
+                        ...this.poiFilters,
+                        activityType: o.Bitmask,
+                      };
+                    } else {
+                      this.poiFilters = {
+                        ...this.poiFilters,
+                        activityType: "",
+                      };
+                    }
+                  }}"
+                  .label="${o.TypeDesc[this.language]}"
+                  .name="chx${o.TypeDesc[this.language]}"
+                ></wc-checkbox>
+              `;
+            })}
+          </div>`
+        : null}
+    </div>
+
+    <div class="filters__divider">
+      <wc-divider></wc-divider>
+    </div>
+
+    <div>
+      <p
+        class="caption pointer"
+        @click="${() => {
+          this.filtersAccordionOpen = {
+            ...this.filtersAccordionOpen,
+            skiArea: !this.filtersAccordionOpen["skiArea"],
+          };
+        }}"
+      >
+        SKI AREA
+        <span>${renderChevron(this.filtersAccordionOpen["skiArea"])}</span>
+      </p>
+      ${this.filtersAccordionOpen["skiArea"]
+        ? html` <div class="options_container">
+            ${this.listSkiAreas.map((o) => {
+              return html`
+                <wc-checkbox
+                  .value="${o.Id === this.poiFilters.skiArea}"
+                  .action="${({ value }) => {
+                    if (value) {
+                      this.poiFilters = {
+                        ...this.poiFilters,
+                        skiArea: o.Id,
+                      };
+                    } else {
+                      this.poiFilters = { ...this.poiFilters, skiArea: "" };
+                    }
+                  }}"
+                  .label="${o.Detail[this.language].Title}"
+                  .name="chx${o.Detail[this.language].Title}"
+                ></wc-checkbox>
+              `;
+            })}
+          </div>`
+        : null}
+    </div>
+
+    <div class="filters__divider">
+      <wc-divider></wc-divider>
     </div>
 
     <div>
@@ -68,28 +141,29 @@ export function render_filters() {
         </div>
       </div>
     </div>
+
     <div>
       <wc-divider></wc-divider>
     </div>
+
     <div>
-      <p class="caption">${t["category"][this.language].toUpperCase()}</p>
-      <div class="options_container">
-        ${this.listMountainAreaTopics.map((o) => {
-          return html`
-            <wc-checkbox
-              .value="${o.Bitmask === parseInt(this.poiFilters.topic)}"
-              .action="${({ value, name }) => {
-                if (value) {
-                  this.poiFilters = { ...this.poiFilters, topic: o.Bitmask };
-                } else {
-                  this.poiFilters = { ...this.poiFilters, topic: "" };
-                }
-              }}"
-              .label="${o.TypeDesc[this.language]}"
-              .name="chx${o.TypeDesc[this.language]}"
-            ></wc-checkbox>
-          `;
-        })}
+      <div>
+        <p class="caption">${t["opening"][this.language].toUpperCase()}</p>
+
+        <div class="options_container">
+          <wc-checkbox
+            .value="${this.poiFilters.isOpen}"
+            .action="${({ value }) => {
+              console.log(value);
+              this.poiFilters = {
+                ...this.poiFilters,
+                isOpen: value,
+              };
+            }}"
+            .label="${t["showOnlyOpenAndAvailableActivities"][this.language]}"
+            .name="chxShowOnlyOpenAndAvailableActivities"
+          ></wc-checkbox>
+        </div>
       </div>
     </div>
   </div>`;

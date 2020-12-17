@@ -8,9 +8,15 @@ export const LANGUAGES = {
 
 export const STATE_DEFAULT_FILTERS = {
   radius: "0",
+  activityType: "",
+  skiArea: "",
+  isOpen: "",
 };
 
-export const STATE_DEFAULT_FILTERS_ACCORDIONS_OPEN = {};
+export const STATE_DEFAULT_FILTERS_ACCORDIONS_OPEN = {
+  skiArea: false,
+  activityType: false,
+};
 
 export const isMobile = () => {
   return document.body.offsetWidth < 992;
@@ -48,6 +54,12 @@ export function getLatLongFromStationDetail(o) {
 export function countFilters(filters) {
   let filtersNumber = 0;
   if (filters.radius !== "0") {
+    filtersNumber = filtersNumber + 1;
+  }
+  if (filters.activityType !== "") {
+    filtersNumber = filtersNumber + 1;
+  }
+  if (filters.skiArea !== "") {
     filtersNumber = filtersNumber + 1;
   }
 

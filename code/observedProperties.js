@@ -15,12 +15,11 @@ export const observedProperties = {
   hereMapsPlacesFound: { type: Array },
   mapAttribution: { type: String },
 
-  listMountainArea: { type: Array },
-  listMountainAreaCurrentPage: { type: Number },
   currentSkiArea: { type: Object },
   currentActivity: { type: Object },
 
-  listMountainAreaTopics: { type: Array },
+  listWinterActivitiesTypes: { type: Array },
+  listSkiAreas: { type: Array },
 
   detailsSkiAreaOpen: { type: Boolean },
   detailsActivityOpen: { type: Boolean },

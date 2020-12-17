@@ -109,10 +109,14 @@ export async function drawMountainAreaOnMap() {
     this.currentLocation
   );
 
+  this.listSkiAreas = skiAreas;
+
   const activities = await requestTourismODHActivityPoiType2(
     this.poiFilters,
     this.currentLocation
   );
+
+  console.log(skiAreas);
   console.log(activities);
 
   // Ski Areas

@@ -1,24 +1,32 @@
 import {
+  BASE_PATH_TOURISM,
   BASE_PATH_TOURISM_ODHACTIVITYPOI,
   BASE_PATH_TOURISM_ODHACTIVITYPOI_REDUCED,
   BASE_PATH_TOURISM_SKIAREA,
 } from "./config";
 
 const createUrlFilters = (filters, currentLocation) => {
-  // let dateFromFilter = "";
-  // if (filters.dateFrom.length) {
-  //   dateFromFilter = `&begindate=${filters.dateFrom}`;
-  // }
-  return ``;
+  let radius = "";
+  if (filters.radius && filters.radius !== "0") {
+    radius = `&latitude=${currentLocation.lat}&longitude=${
+      currentLocation.lng
+    }&radius=${parseInt(filters.radius) * 1000}`;
+  }
+  let activityType = "";
+  if (filters.activityType !== "") {
+    activityType = `&subtype=${filters.activityType}`;
+  }
+  let skiArea = "";
+  if (filters.skiArea !== "") {
+    skiArea = `&areafilter=ska${filters.skiArea}`;
+  }
+  return `${radius}${activityType}${skiArea}`;
 };
 
-export const requestTourismSkiArea = async (filters, currentLocation) => {
+export const requestTourismSkiArea = async () => {
   try {
     const request = await fetch(
-      `${BASE_PATH_TOURISM_SKIAREA}${createUrlFilters(
-        filters,
-        currentLocation
-      )}?elements=0&fields=Id,Latitude,Longitude`
+      `${BASE_PATH_TOURISM_SKIAREA}?elements=0&fields=Id,Latitude,Longitude,Detail`
     );
     if (request.status !== 200) {
       throw new Error(request.statusText);
@@ -43,7 +51,7 @@ export const requestTourismODHActivityPoiType2 = async (
 ) => {
   try {
     const request = await fetch(
-      `${BASE_PATH_TOURISM_ODHACTIVITYPOI_REDUCED}?type=2&fields=Id,GpsInfo${createUrlFilters(
+      `${BASE_PATH_TOURISM_ODHACTIVITYPOI_REDUCED}?type=2&fields=Id,GpsInfo,IsOpen${createUrlFilters(
         filters,
         currentLocation
       )}`
@@ -51,8 +59,28 @@ export const requestTourismODHActivityPoiType2 = async (
     if (request.status !== 200) {
       throw new Error(request.statusText);
     }
-    const response = await request.json();
+    let response = await request.json();
+    if (filters.isOpen) {
+      response = response.filter((element) => {
+        return element.IsOpen === true;
+      });
+    }
     return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const requestODHActivityPoiTypes = async () => {
+  try {
+    const request = await fetch(`${BASE_PATH_TOURISM}/ODHActivityPoiTypes`);
+    if (request.status !== 200) {
+      throw new Error(request.statusText);
+    }
+    const response = await request.json();
+    return response.filter((o) => {
+      return o.Parent === "Winter" && o.Type === "SubType";
+    });
   } catch (error) {
     console.log(error);
   }
