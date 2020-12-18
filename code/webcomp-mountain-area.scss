@@ -47,7 +47,7 @@
   top: 0;
   left: 0;
   max-height: 99vh;
-  z-index: 2;
+  z-index: 3;
   overflow: hidden;
   width: 100%;
   @media only screen and (min-width: 768px) {
@@ -191,7 +191,7 @@
   display: inline;
   position: absolute;
   right: 16px;
-  z-index: 3;
+  z-index: 2;
   top: 80px;
 
   &.big_margin {
