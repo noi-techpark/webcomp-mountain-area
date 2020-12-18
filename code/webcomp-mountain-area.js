@@ -121,7 +121,7 @@ class MountainArea extends LitElement {
 
   updated(changedProperties) {
     changedProperties.forEach((oldValue, propName) => {
-      if (propName === "mobileOpen") {
+      if (propName === "mobileOpen" || propName === "isMobile") {
         this.map.invalidateSize();
       }
       if (propName === "poiFilters" || propName === "language") {
