@@ -152,6 +152,38 @@
         }
       }
     }
+    .weatherDetails__section {
+      .weatherDetails__section__title {
+        @include MixinParagraphMedium;
+        margin-bottom: 4px;
+      }
+      .weatherDetails__section__text {
+        @include MixinParagraphRegular;
+        margin-top: 4px;
+      }
+      .weatherDetails__section__img_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 16px;
+        margin-top: 8px;
+        img {
+          max-width: 100%;
+        }
+      }
+    }
+    .weatherDetails__section_forecast {
+      .weatherDetails__section_forecast__img_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 16px;
+        margin-top: 8px;
+        img {
+          max-width: 100%;
+        }
+      }
+    }
   }
 }
 

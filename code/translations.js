@@ -309,4 +309,47 @@ export const t = {
     en: "Evolution",
     de: "Evolution",
   },
+
+  maximum: {
+    it: "Massime",
+    en: "Maximum",
+    de: "Maximal",
+  },
+  minimum: {
+    it: "Minime",
+    en: "Minimum",
+    de: "Minimum",
+  },
+  weather: {
+    it: "Tempo",
+    en: "Weather",
+    de: "Wetter",
+  },
+
+  mountain: {
+    it: "Montagna",
+    en: "Mountain",
+    de: "Berg",
+  },
+
+  zerolimit: {
+    it: "Zerolimit",
+    en: "Zerolimit",
+    de: "Zerolimit",
+  },
+  sunrise: {
+    it: "Alba",
+    en: "Sunrise",
+    de: "Sonnenaufgang",
+  },
+  sunset: {
+    it: "Tramonto",
+    en: "Sunset",
+    de: "Sonnenuntergang",
+  },
+  temperatures: {
+    it: "Temperature",
+    en: "Temperatures",
+    de: "Temperaturen",
+  },
 };
