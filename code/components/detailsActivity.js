@@ -32,8 +32,10 @@ export function render_details_activity() {
             url: `http://www.google.com/maps/place/${Latitude},${Longitude}`,
           }}"
           .closeModalAction="${() => {
-            this.detailsSkiAreaOpen = false;
+            this.filtersOpen = false;
             this.detailsActivityOpen = false;
+            this.weatherReportOpen = false;
+            this.detailsSkiAreaOpen = false;
           }}"
         ></wc-sidemodal-header>
       </div>

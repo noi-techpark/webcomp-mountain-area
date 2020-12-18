@@ -1,8 +1,6 @@
 import dayjs from "dayjs";
 import { html } from "lit-element";
 import { SIDE_MODAL_ROW_TYPES } from "../shared_components/sideModalRow/sideModalRow";
-// import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
-// import { SIDE_MODAL_ROW_TYPES } from "../shared_components/sideModalRow/sideModalRow";
 import { t } from "../translations";
 
 export function render_weatherReport() {
@@ -24,9 +22,10 @@ export function render_weatherReport() {
             url: `http://meteo.provincia.bz.it/alto-adige.asp?meteo_bdoc=1`,
           }}"
           .closeModalAction="${() => {
-            this.detailsSkiAreaOpen = false;
+            this.filtersOpen = false;
             this.detailsActivityOpen = false;
             this.weatherReportOpen = false;
+            this.detailsSkiAreaOpen = false;
           }}"
         ></wc-sidemodal-header>
       </div>

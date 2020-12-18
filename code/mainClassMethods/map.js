@@ -145,6 +145,7 @@ export async function drawMountainAreaOnMap() {
 
       this.filtersOpen = false;
       this.detailsActivityOpen = false;
+      this.weatherReportOpen = false;
       this.detailsSkiAreaOpen = true;
     };
 
@@ -229,6 +230,7 @@ export async function drawMountainAreaOnMap() {
           };
 
           this.filtersOpen = false;
+          this.weatherReportOpen = false;
           this.detailsSkiAreaOpen = false;
           this.detailsActivityOpen = true;
         }
