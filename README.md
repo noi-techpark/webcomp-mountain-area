@@ -6,7 +6,7 @@ Replace all `ToDo` notes in this file and adjust also the following files:
     - Adjust the general parts like title, description, ...
     - Adjust the configuration part with all possible configuration options (https://webcomponents.opendatahub.bz.it/getting-started)
 
-# ToDo: Project Name
+# webcomp-mountain-area
 
 ToDo: Description of the project.
 
