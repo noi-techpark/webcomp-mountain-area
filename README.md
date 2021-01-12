@@ -1,4 +1,4 @@
-# Mountain area - Web component 
+# Mountain area - Web component
 
 A web component that shows the mountains data stored in the Open Data Hub.
 
@@ -13,6 +13,7 @@ A web component that shows the mountains data stored in the Open Data Hub.
 
 ## Usage
 
+Include the webcompscript file `dist/webcomp-mountain-area.js` in your HTML and define the web component like this:
 ```html
 <webcomp-mountain-area
     width="100%"
@@ -81,7 +82,9 @@ To build the project, the following prerequisites must be met:
 
 - Node 14.15.4 / Yarn 1.22.10
 
-<!-- For a ready to use Docker environment with all prerequisites already installed and prepared, you can check out the [Docker environment](#docker-environment) section. -->
+For a ready to use Docker environment with all prerequisites already installed
+and prepared, you can check out the [Docker environment](#docker-environment)
+section.
 
 ### Source code
 
