@@ -1,7 +1,7 @@
 {
   "title": "Mountain Area Webcomponent",
-  "description": "TODO",
-  "descriptionAbstract": "TODO",
+  "description": "This web component shows all ski areas provided by the Open Data Hub.",
+  "descriptionAbstract": "A widget that allows to easily integrate the map view of the ski areas and winter activities in South Tyrol or near a location.",
   "license": "AGPL-3.0-or-later",
   "copyrightHolders": [
     {
