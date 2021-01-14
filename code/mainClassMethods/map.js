@@ -190,7 +190,7 @@ export async function drawMountainAreaOnMap() {
         const details = await requestActivityDetails({
           Id: activity.Id,
         });
-        if (details) {
+        if (details && details.GpsTrack) {
           // If the activity has a GpsTrack show it
           if (details.GpsTrack.length) {
             const gpx = await requestGPX({
