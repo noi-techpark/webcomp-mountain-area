@@ -80,24 +80,26 @@ export function drawUserOnMap() {
 }
 
 function drawTrack(track, arrivalPoint) {
-  this.trackPolyline = Leaflet.polyline(track, {
-    weight: 3,
-    color: "#e6040e",
-  }).addTo(this.map);
-
-  const icon_pinRed = Leaflet.icon({
-    iconUrl: pinRed,
-    iconSize: [36, 36],
-  });
-
-  if (arrivalPoint && arrivalPoint.Latitude && arrivalPoint.Longitude) {
-    const { Latitude, Longitude } = arrivalPoint;
-    this.marker_arrivalPoint = Leaflet.marker([Latitude, Longitude], {
-      icon: icon_pinRed,
+  if (this.map) {
+    this.trackPolyline = Leaflet.polyline(track, {
+      weight: 3,
+      color: "#e6040e",
     }).addTo(this.map);
-  }
 
-  this.map.fitBounds(this.trackPolyline.getBounds());
+    const icon_pinRed = Leaflet.icon({
+      iconUrl: pinRed,
+      iconSize: [36, 36],
+    });
+
+    if (arrivalPoint && arrivalPoint.Latitude && arrivalPoint.Longitude) {
+      const { Latitude, Longitude } = arrivalPoint;
+      this.marker_arrivalPoint = Leaflet.marker([Latitude, Longitude], {
+        icon: icon_pinRed,
+      }).addTo(this.map);
+    }
+
+    this.map.fitBounds(this.trackPolyline.getBounds());
+  }
 }
 
 export async function drawMountainAreaOnMap() {
@@ -115,9 +117,6 @@ export async function drawMountainAreaOnMap() {
     this.poiFilters,
     this.currentLocation
   );
-
-  console.log(skiAreas);
-  console.log(activities);
 
   // Ski Areas
   skiAreas.map((skiArea) => {

@@ -85,7 +85,9 @@ class MountainArea extends BaseMountainArea {
   updated(changedProperties) {
     changedProperties.forEach((oldValue, propName) => {
       if (propName === "mobileOpen" || propName === "isMobile") {
-        this.map.invalidateSize();
+        if (this.map) {
+          this.map.invalidateSize();
+        }
       }
       if (propName === "poiFilters" || propName === "language") {
         if (this.map) {
@@ -119,8 +121,6 @@ class MountainArea extends BaseMountainArea {
   );
 
   render() {
-    console.log(this.weather);
-
     if (!this.tiles_url) {
       return html`
         <p style="color:red">Required attribute \`tiles_url\` is missing</p>

@@ -1,7 +1,7 @@
 import { LitElement } from "lit-element";
 import {
+  get_system_language,
   isMobile,
-  LANGUAGES,
   STATE_DEFAULT_FILTERS,
   STATE_DEFAULT_FILTERS_ACCORDIONS_OPEN,
 } from "./utils";
@@ -13,7 +13,7 @@ export class BaseMountainArea extends LitElement {
     this.width = "100%";
     this.fontFamily = "";
     this.mapAttribution = "";
-    this.language = LANGUAGES.EN;
+    this.language = get_system_language();
 
     this.mobileOpen = false;
     this.isLoading = true;
