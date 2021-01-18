@@ -1,10 +1,11 @@
 import "@babel/polyfill";
 import leafletStyle from "leaflet/dist/leaflet.css";
-import { css, html, LitElement, unsafeCSS } from "lit-element";
+import { css, html, unsafeCSS } from "lit-element";
 import { classMap } from "lit-html/directives/class-map";
 import { debounce as _debounce } from "lodash";
 import { requestGetCoordinatesFromSearch } from "./api/hereMaps";
 import { requestWeather } from "./api/weather";
+import { BaseMountainArea } from "./baseClass";
 import { render_details_activity } from "./components/detailsActivity";
 import { render_details_skiArea } from "./components/detailsSkiArea";
 import { render_filters } from "./components/filters";
@@ -30,48 +31,10 @@ import "./shared_components/sideModalRow/sideModalRow";
 import "./shared_components/sideModalTabs/sideModalTabs";
 import "./shared_components/tag/tag";
 import { t } from "./translations";
-import {
-  isMobile,
-  LANGUAGES,
-  STATE_DEFAULT_FILTERS,
-  STATE_DEFAULT_FILTERS_ACCORDIONS_OPEN,
-} from "./utils";
-import ParkingStyle from "./webcomp-mountain-area.scss";
+import { isMobile, LANGUAGES } from "./utils";
+import MountainAreaStyle from "./webcomp-mountain-area.scss";
 
-class MountainArea extends LitElement {
-  constructor() {
-    super();
-    this.height = "500px";
-    this.width = "100%";
-    this.fontFamily = "";
-    this.mapAttribution = "";
-    this.language = LANGUAGES.EN;
-
-    this.mobileOpen = false;
-    this.isLoading = true;
-    this.isMobile = isMobile();
-
-    this.map = undefined;
-    this.currentLocation = { lat: 46.479, lng: 11.331 };
-
-    this.hereMapsPlacesFound = [];
-    this.hereMapsQuery = "";
-
-    this.currentSkiArea = {};
-
-    this.weather = {};
-
-    this.detailsSkiAreaOpen = false;
-    this.detailsActivityOpen = false;
-    this.filtersOpen = false;
-    this.weatherReportOpen = false;
-
-    this.poiFilters = STATE_DEFAULT_FILTERS;
-    this.filtersAccordionOpen = STATE_DEFAULT_FILTERS_ACCORDIONS_OPEN;
-
-    this.listWinterActivitiesTypes = [];
-  }
-
+class MountainArea extends BaseMountainArea {
   static get properties() {
     return observedProperties;
   }
@@ -80,7 +43,7 @@ class MountainArea extends LitElement {
     return css`
       /* Map */
       ${unsafeCSS(leafletStyle)}
-      ${unsafeCSS(ParkingStyle)}
+      ${unsafeCSS(MountainAreaStyle)}
     `;
   }
 
@@ -122,7 +85,9 @@ class MountainArea extends LitElement {
   updated(changedProperties) {
     changedProperties.forEach((oldValue, propName) => {
       if (propName === "mobileOpen" || propName === "isMobile") {
-        this.map.invalidateSize();
+        if (this.map) {
+          this.map.invalidateSize();
+        }
       }
       if (propName === "poiFilters" || propName === "language") {
         if (this.map) {
@@ -156,7 +121,30 @@ class MountainArea extends LitElement {
   );
 
   render() {
-    console.log(this.weather);
+    if (!this.tiles_url) {
+      return html`
+        <p style="color:red">Required attribute \`tiles_url\` is missing</p>
+      `;
+    }
+
+    let isSmallWidth = false;
+    let isSmallHeight = false;
+    if (this.width.includes("px")) {
+      isSmallWidth = parseInt(this.width.replace("px")) <= 400;
+    } else if (this.width.includes("%")) {
+      if (this.shadowRoot.querySelector(".meteo_generic")) {
+        isSmallWidth =
+          this.shadowRoot.querySelector(".meteo_generic").clientWidth <= 400;
+      }
+    }
+    if (this.height.includes("px")) {
+      isSmallHeight = parseInt(this.height.replace("px")) <= 400;
+    } else if (this.height.includes("%")) {
+      if (this.shadowRoot.querySelector(".meteo_generic")) {
+        isSmallHeight =
+          this.shadowRoot.querySelector(".meteo_generic").clientHeight <= 400;
+      }
+    }
 
     return html`
       <style>
@@ -166,11 +154,6 @@ class MountainArea extends LitElement {
           --w-c-font-family: ${this.fontFamily};
         }
       </style>
-      ${this.tiles_url
-        ? ""
-        : html`
-            <p style="color:red">Required attribute \`tiles_url\` is missing</p>
-          `}
 
       <div
         class=${classMap({
@@ -178,6 +161,8 @@ class MountainArea extends LitElement {
           mobile: this.isMobile,
           MODE__mobile__open: this.isMobile && this.mobileOpen,
           MODE__mobile__closed: this.isMobile && !this.mobileOpen,
+          isSmallWidth: isSmallWidth,
+          isSmallHeight: isSmallHeight,
         })}
       >
         ${this.isMobile && !this.mobileOpen
@@ -205,7 +190,7 @@ class MountainArea extends LitElement {
           : null}
         ${(this.isMobile && this.mobileOpen) || !this.isMobile
           ? html`<div class="mountainArea__sideBar">
-              <div class="mountainArea__sideBar__searchBar mt-4px">
+              <div class="mountainArea__sideBar__searchBar">
                 ${render_searchPlaces.bind(this)()}
               </div>
 

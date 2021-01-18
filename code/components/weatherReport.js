@@ -8,7 +8,6 @@ export function render_weatherReport() {
   const { evolution, date, Forecast } = this.weather;
   const { Mountain } = this.weather;
   const { Title, Temperatures, Weatherdesc } = Conditions[0];
-  console.log(date, Title, Temperatures, Weatherdesc);
 
   return html`
     <div class="details">
