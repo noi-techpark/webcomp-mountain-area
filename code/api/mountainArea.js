@@ -20,7 +20,11 @@ const createUrlFilters = (filters, currentLocation) => {
   if (filters.skiArea !== "") {
     skiArea = `&areafilter=ska${filters.skiArea}`;
   }
-  return `${radius}${activityType}${skiArea}`;
+  let locfilter = "";
+  if (filters.locfilter !== "") {
+    locfilter = `&locfilter=reg${filters.locfilter}`;
+  }
+  return `${radius}${activityType}${skiArea}${locfilter}`;
 };
 
 export const requestTourismSkiArea = async (filters, currentLocation) => {

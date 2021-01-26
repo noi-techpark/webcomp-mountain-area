@@ -109,6 +109,15 @@
         "options": {
           "default": "false"
         }
+      },
+      {
+        "key": "locfilterActivities",
+        "type": "text",
+        "label": "Filter activities by area id. Default is \"\"",
+        "required": false,
+        "options": {
+          "default": ""
+        }
       }
     ]
   }

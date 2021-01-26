@@ -81,6 +81,12 @@ Example: `"5"`
 If set to `"true"` the road directions are hidden. Default is `"false"`
 
 Example: `"true"`
+#### locfilterActivities
+
+Filter activities by area id. Default is `""`
+
+Example: `"D2633A27C24E11D18F1B006097B8970B"`
+
 ## Getting started
 
 These instructions will get you a copy of the project up and running

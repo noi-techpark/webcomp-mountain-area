@@ -11,6 +11,7 @@ export const STATE_DEFAULT_FILTERS = {
   activityType: "",
   skiArea: "",
   isOpen: "",
+  locfilter: "",
 };
 
 export const STATE_DEFAULT_FILTERS_ACCORDIONS_OPEN = {
