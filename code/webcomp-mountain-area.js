@@ -62,6 +62,12 @@ class MountainArea extends BaseMountainArea {
       "resize",
       _debounce(this.handleWindowResize.bind(this), 150)
     );
+    if (this.filterRadius && parseFloat(this.filterRadius)) {
+      this.poiFilters = {
+        ...this.poiFilters,
+        radius: this.filterRadius,
+      };
+    }
   }
   disconnectedCallback() {
     window.removeEventListener("resize", this.handleWindowResize.bind(this));

@@ -3,6 +3,7 @@ export const observedProperties = {
   width: { type: String },
   fontFamily: { type: String },
   language: { type: String },
+  filterRadius: { type: String },
 
   mobileOpen: { type: Boolean },
   isMobile: { type: Boolean },

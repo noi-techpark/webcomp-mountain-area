@@ -70,6 +70,11 @@ Set the URL of the API that provides the tiles.
 
 Example: `"https://1.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?apiKey="`
 
+#### filterRadius
+
+The radius expressed in kilometers with which to filter events. Default value is 0.
+
+Example: `"5"`
 
 ## Getting started
 
