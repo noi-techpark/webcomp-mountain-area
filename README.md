@@ -22,7 +22,9 @@ Include the webcompscript file `dist/webcomp-mountain-area.js` in your HTML and 
     language="it"
     mapAttribution='Map Tiles &copy; <a href="http://developer.here.com">HERE</a>'
     currentLocation='{ "lat": 46.31, "lng": 11.26 }'
-    tiles-url="https://1.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?apiKey=">
+    tiles-url="https://1.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?apiKey="
+    disablePOIDirections
+    disableMeteo>
 </webcomp-mountain-area>
 ```
 
@@ -78,12 +80,15 @@ Example: `"5"`
 
 #### disablePOIDirections
 
-If set to `"true"` the road directions are hidden. Default is `"false"`
-
-Example: `"true"`
+If set the road directions are hidden
 #### locfilterActivities
 
-Filter activities by area id. Default is `""`
+Filter activities by area id. Default is `""`.
+
+Example: `"D2633A27C24E11D18F1B006097B8970B"`
+#### disableMeteo
+
+If set the meteo button is hidden.
 
 Example: `"D2633A27C24E11D18F1B006097B8970B"`
 

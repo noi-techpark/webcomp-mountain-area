@@ -15,6 +15,7 @@ export class BaseMountainArea extends LitElement {
     this.mapAttribution = "";
     this.language = get_system_language();
     this.disablePOIDirections = false;
+    this.disableMeteo = false;
 
     this.mobileOpen = false;
     this.isLoading = true;

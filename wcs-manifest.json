@@ -103,17 +103,26 @@
       },
       {
         "key": "disablePOIDirections",
-        "type": "text",
-        "label": "If set to \"true\" the road directions are hidden. Default is \"false\"",
+        "type": "boolean",
+        "label": "If set the road directions are hidden",
         "required": false,
         "options": {
-          "default": "false"
+          "default": ""
         }
       },
       {
         "key": "locfilterActivities",
         "type": "text",
         "label": "Filter activities by area id. Default is \"\"",
+        "required": false,
+        "options": {
+          "default": ""
+        }
+      },
+      {
+        "key": "disableMeteo",
+        "type": "boolean",
+        "label": "If set the meteo button is hidden",
         "required": false,
         "options": {
           "default": ""

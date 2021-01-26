@@ -161,6 +161,8 @@ class MountainArea extends BaseMountainArea {
       }
     }
 
+    console.log(this.disableMeteo);
+
     return html`
       <style>
         * {
