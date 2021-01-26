@@ -100,6 +100,15 @@
         "options": {
           "default": "5"
         }
+      },
+      {
+        "key": "disablePOIDirections",
+        "type": "text",
+        "label": "If set to \"true\" the road directions are hidden. Default is \"false\"",
+        "required": false,
+        "options": {
+          "default": "false"
+        }
       }
     ]
   }

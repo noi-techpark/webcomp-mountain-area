@@ -4,6 +4,7 @@ export const observedProperties = {
   fontFamily: { type: String },
   language: { type: String },
   filterRadius: { type: String },
+  disablePOIDirections: { type: Boolean },
 
   mobileOpen: { type: Boolean },
   isMobile: { type: Boolean },

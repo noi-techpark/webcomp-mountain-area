@@ -27,10 +27,15 @@ export function render_details_activity() {
           .type="title"
           .tTitle="${Title}"
           .tLinkedTagText="${SmgTags[0]}"
-          .tOptionalLink="${{
-            text: t["directions"][this.language],
-            url: `http://www.google.com/maps/place/${Latitude},${Longitude}`,
-          }}"
+          .tOptionalLink="${!this.disablePOIDirections
+            ? {
+                text: t["directions"][this.language],
+                url: `http://www.google.com/maps/place/${Latitude},${Longitude}`,
+              }
+            : {
+                text: "",
+                url: "",
+              }}"
           .closeModalAction="${() => {
             this.filtersOpen = false;
             this.detailsActivityOpen = false;

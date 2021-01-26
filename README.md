@@ -76,6 +76,11 @@ The radius expressed in kilometers with which to filter events. Default value is
 
 Example: `"5"`
 
+#### disablePOIDirections
+
+If set to `"true"` the road directions are hidden. Default is `"false"`
+
+Example: `"true"`
 ## Getting started
 
 These instructions will get you a copy of the project up and running
