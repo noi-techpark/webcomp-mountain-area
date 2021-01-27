@@ -68,13 +68,11 @@ class MountainArea extends BaseMountainArea {
         radius: this.filterRadius,
       };
     }
-    if (
-      this.locfilterActivities !== "" &&
-      this.locfilterActivities !== undefined
-    ) {
+
+    if (this.skiAreaFilter.length && this.skiAreaFilter !== undefined) {
       this.poiFilters = {
         ...this.poiFilters,
-        locfilter: this.locfilterActivities,
+        skiArea: this.skiAreaFilter,
       };
     }
   }

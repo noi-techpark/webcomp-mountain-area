@@ -12,19 +12,20 @@ const createUrlFilters = (filters, currentLocation) => {
       currentLocation.lng
     }&radius=${parseInt(filters.radius) * 1000}`;
   }
+
   let activityType = "";
   if (filters.activityType !== "") {
     activityType = `&subtype=${filters.activityType}`;
   }
+
   let skiArea = "";
   if (filters.skiArea !== "") {
-    skiArea = `&areafilter=ska${filters.skiArea}`;
+    skiArea = `&areafilter=${filters.skiArea
+      .map((sa) => `ska${sa}`)
+      .join(",")}`;
   }
-  let locfilter = "";
-  if (filters.locfilter !== "") {
-    locfilter = `&locfilter=reg${filters.locfilter}`;
-  }
-  return `${radius}${activityType}${skiArea}${locfilter}`;
+
+  return `${radius}${activityType}${skiArea}`;
 };
 
 export const requestTourismSkiArea = async (filters, currentLocation) => {

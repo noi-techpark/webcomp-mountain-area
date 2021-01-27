@@ -24,7 +24,8 @@ Include the webcompscript file `dist/webcomp-mountain-area.js` in your HTML and 
     currentLocation='{ "lat": 46.31, "lng": 11.26 }'
     tiles-url="https://1.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?apiKey="
     disablePOIDirections
-    disableMeteo>
+    disableMeteo
+    skiAreaFilter='["SKI4972D41A8DC042F88190C154D9CC8A8E"]'>
 </webcomp-mountain-area>
 ```
 
@@ -82,11 +83,11 @@ Example: `"5"`
 
 If set the road directions are hidden
 
-#### locfilterActivities
+#### skiAreaFilter
 
-Filter activities by area id. Default is `""`.
+Filter activities and areas by skiArea ids. Default is `[]`.
 
-Example: `"D2633A27C24E11D18F1B006097B8970B"`
+Example: `'["SKI4972D41A8DC042F88190C154D9CC8A8E", "SKI28F1AE811BE8418DBCCACBAA604272C8", "SKIC57DA31F859141A1802E86B410FEBD70"]'`
 
 #### disableMeteo
 

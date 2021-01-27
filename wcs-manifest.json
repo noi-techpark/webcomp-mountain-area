@@ -111,12 +111,12 @@
         }
       },
       {
-        "key": "locfilterActivities",
+        "key": "skiAreaFilter",
         "type": "text",
-        "label": "Filter activities by area id. Default is \"\"",
+        "label": "Filter activities and areas by skiArea ids. Default is []",
         "required": false,
         "options": {
-          "default": ""
+          "default": "[]"
         }
       },
       {

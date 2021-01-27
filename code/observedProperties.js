@@ -6,7 +6,7 @@ export const observedProperties = {
   filterRadius: { type: String },
   disablePOIDirections: { type: Boolean },
   disableMeteo: { type: Boolean },
-  locfilterActivities: { type: String },
+  skiAreaFilter: { type: Array },
 
   mobileOpen: { type: Boolean },
   isMobile: { type: Boolean },

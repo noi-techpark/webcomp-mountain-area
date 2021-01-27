@@ -9,7 +9,7 @@ export const LANGUAGES = {
 export const STATE_DEFAULT_FILTERS = {
   radius: "0",
   activityType: "",
-  skiArea: "",
+  skiArea: [], // Array of strings
   isOpen: "",
   locfilter: "",
 };

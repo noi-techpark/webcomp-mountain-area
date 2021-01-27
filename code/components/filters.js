@@ -93,15 +93,20 @@ export function render_filters() {
             ${this.listSkiAreas.map((o) => {
               return html`
                 <wc-checkbox
-                  .value="${o.Id === this.poiFilters.skiArea}"
+                  .value="${this.poiFilters.skiArea.includes(o.Id)}"
                   .action="${({ value }) => {
                     if (value) {
                       this.poiFilters = {
                         ...this.poiFilters,
-                        skiArea: o.Id,
+                        skiArea: [...this.poiFilters.skiArea, o.Id],
                       };
                     } else {
-                      this.poiFilters = { ...this.poiFilters, skiArea: "" };
+                      this.poiFilters = {
+                        ...this.poiFilters,
+                        skiArea: this.poiFilters.skiArea.filter((sa) => {
+                          return sa !== o.Id;
+                        }),
+                      };
                     }
                   }}"
                   .label="${o.Detail[this.language].Title}"
