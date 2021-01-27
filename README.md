@@ -81,16 +81,16 @@ Example: `"5"`
 #### disablePOIDirections
 
 If set the road directions are hidden
+
 #### locfilterActivities
 
 Filter activities by area id. Default is `""`.
 
 Example: `"D2633A27C24E11D18F1B006097B8970B"`
+
 #### disableMeteo
 
 If set the meteo button is hidden.
-
-Example: `"D2633A27C24E11D18F1B006097B8970B"`
 
 ## Getting started
 
