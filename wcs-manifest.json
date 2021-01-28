@@ -127,6 +127,15 @@
         "options": {
           "default": ""
         }
+      },
+      {
+        "key": "activitiesFilter",
+        "type": "text",
+        "label": "If set, all the activities are filtered by the bitmask values in the array.",
+        "required": false,
+        "options": {
+          "default": "[]"
+        }
       }
     ]
   }

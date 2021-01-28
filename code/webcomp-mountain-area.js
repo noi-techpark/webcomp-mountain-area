@@ -75,6 +75,12 @@ class MountainArea extends BaseMountainArea {
         skiArea: this.skiAreaFilter,
       };
     }
+    if (this.activitiesFilter.length && this.activitiesFilter !== undefined) {
+      this.poiFilters = {
+        ...this.poiFilters,
+        activityType: this.activitiesFilter,
+      };
+    }
   }
   disconnectedCallback() {
     window.removeEventListener("resize", this.handleWindowResize.bind(this));
@@ -158,6 +164,8 @@ class MountainArea extends BaseMountainArea {
           this.shadowRoot.querySelector(".meteo_generic").clientHeight <= 400;
       }
     }
+
+    console.log(this.poiFilters);
 
     return html`
       <style>

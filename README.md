@@ -25,7 +25,8 @@ Include the webcompscript file `dist/webcomp-mountain-area.js` in your HTML and 
     tiles-url="https://1.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?apiKey="
     disablePOIDirections
     disableMeteo
-    skiAreaFilter='["SKI4972D41A8DC042F88190C154D9CC8A8E"]'>
+    skiAreaFilter='["SKI4972D41A8DC042F88190C154D9CC8A8E"]'
+    activitiesFilter="[8,16]">
 </webcomp-mountain-area>
 ```
 
@@ -92,6 +93,12 @@ Example: `'["SKI4972D41A8DC042F88190C154D9CC8A8E", "SKI28F1AE811BE8418DBCCACBAA6
 #### disableMeteo
 
 If set the meteo button is hidden.
+
+#### activitiesFilter
+
+If set, all the activities are filtered by the bitmask values in the array.
+
+Example: `"[8,16]"`
 
 ## Getting started
 

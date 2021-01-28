@@ -14,8 +14,11 @@ const createUrlFilters = (filters, currentLocation) => {
   }
 
   let activityType = "";
-  if (filters.activityType !== "") {
-    activityType = `&subtype=${filters.activityType}`;
+  if (filters.activityType.length) {
+    const bitmaskSum = filters.activityType.reduce(
+      (accumulator, currentValue) => accumulator + currentValue
+    );
+    activityType = `&subtype=${bitmaskSum}`;
   }
 
   let skiArea = "";

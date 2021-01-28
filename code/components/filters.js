@@ -47,20 +47,35 @@ export function render_filters() {
             ${this.listWinterActivitiesTypes.map((o) => {
               return html`
                 <wc-checkbox
-                  .value="${o.Bitmask ===
-                  parseInt(this.poiFilters.activityType)}"
+                  .value="${this.poiFilters.activityType.includes(o.Bitmask)}"
                   .action="${({ value }) => {
-                    if (value) {
+                    if (this.poiFilters.activityType.includes(o.Bitmask)) {
                       this.poiFilters = {
                         ...this.poiFilters,
-                        activityType: o.Bitmask,
+                        activityType: this.poiFilters.activityType.filter(
+                          (c) => c !== o.Bitmask
+                        ),
                       };
                     } else {
                       this.poiFilters = {
                         ...this.poiFilters,
-                        activityType: "",
+                        activityType: [
+                          ...this.poiFilters.activityType,
+                          o.Bitmask,
+                        ],
                       };
                     }
+                    // if (value) {
+                    //   this.poiFilters = {
+                    //     ...this.poiFilters,
+                    //     activityType: o.Bitmask,
+                    //   };
+                    // } else {
+                    //   this.poiFilters = {
+                    //     ...this.poiFilters,
+                    //     activityType: "",
+                    //   };
+                    // }
                   }}"
                   .label="${o.TypeDesc[this.language]}"
                   .name="chx${o.TypeDesc[this.language]}"
