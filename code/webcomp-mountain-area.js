@@ -165,8 +165,6 @@ class MountainArea extends BaseMountainArea {
       }
     }
 
-    console.log(this.poiFilters);
-
     return html`
       <style>
         * {
