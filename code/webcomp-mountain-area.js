@@ -62,6 +62,25 @@ class MountainArea extends BaseMountainArea {
       "resize",
       _debounce(this.handleWindowResize.bind(this), 150)
     );
+    if (this.filterRadius && parseFloat(this.filterRadius)) {
+      this.poiFilters = {
+        ...this.poiFilters,
+        radius: this.filterRadius,
+      };
+    }
+
+    if (this.skiAreaFilter.length && this.skiAreaFilter !== undefined) {
+      this.poiFilters = {
+        ...this.poiFilters,
+        skiArea: this.skiAreaFilter,
+      };
+    }
+    if (this.activitiesFilter.length && this.activitiesFilter !== undefined) {
+      this.poiFilters = {
+        ...this.poiFilters,
+        activityType: this.activitiesFilter,
+      };
+    }
   }
   disconnectedCallback() {
     window.removeEventListener("resize", this.handleWindowResize.bind(this));

@@ -12,21 +12,35 @@ const createUrlFilters = (filters, currentLocation) => {
       currentLocation.lng
     }&radius=${parseInt(filters.radius) * 1000}`;
   }
+
   let activityType = "";
-  if (filters.activityType !== "") {
-    activityType = `&subtype=${filters.activityType}`;
+  if (filters.activityType.length) {
+    const bitmaskSum = filters.activityType.reduce(
+      (accumulator, currentValue) => accumulator + currentValue
+    );
+    activityType = `&subtype=${bitmaskSum}`;
   }
+
   let skiArea = "";
   if (filters.skiArea !== "") {
-    skiArea = `&areafilter=ska${filters.skiArea}`;
+    skiArea = `&areafilter=${filters.skiArea
+      .map((sa) => `ska${sa}`)
+      .join(",")}`;
   }
+
   return `${radius}${activityType}${skiArea}`;
 };
 
-export const requestTourismSkiArea = async () => {
+export const requestTourismSkiArea = async (filters, currentLocation) => {
+  let radius = "";
+  if (filters.radius && filters.radius !== "0") {
+    radius = `&latitude=${currentLocation.lat}&longitude=${
+      currentLocation.lng
+    }&radius=${parseInt(filters.radius) * 1000}`;
+  }
   try {
     const request = await fetch(
-      `${BASE_PATH_TOURISM_SKIAREA}?elements=0&fields=Id,Latitude,Longitude,Detail`
+      `${BASE_PATH_TOURISM_SKIAREA}?elements=0&fields=Id,Latitude,Longitude,Detail${radius}`
     );
     if (request.status !== 200) {
       throw new Error(request.statusText);

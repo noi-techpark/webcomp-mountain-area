@@ -119,38 +119,48 @@ export async function drawMountainAreaOnMap() {
   );
 
   // Ski Areas
-  skiAreas.map((skiArea) => {
-    const marker_position = getLatLongFromStationDetail({
-      x: skiArea.Longitude,
-      y: skiArea.Latitude,
-    });
-    const mountainArea_icon = Leaflet.icon({
-      iconUrl: pinSki,
-      iconSize: [36, 36],
-    });
-    const marker = Leaflet.marker([marker_position.lat, marker_position.lng], {
-      icon: mountainArea_icon,
-    });
-
-    const action = async () => {
-      const details = await requestSkiAreaDetails({
-        Id: skiArea.Id,
-      });
-      if (details) {
-        this.currentSkiArea = {
-          ...details,
-        };
+  skiAreas
+    .filter((skiArea) => {
+      if (this.poiFilters.skiArea.length) {
+        return this.poiFilters.skiArea.includes(skiArea.Id);
       }
+      return true;
+    })
+    .map((skiArea) => {
+      const marker_position = getLatLongFromStationDetail({
+        x: skiArea.Longitude,
+        y: skiArea.Latitude,
+      });
+      const mountainArea_icon = Leaflet.icon({
+        iconUrl: pinSki,
+        iconSize: [36, 36],
+      });
+      const marker = Leaflet.marker(
+        [marker_position.lat, marker_position.lng],
+        {
+          icon: mountainArea_icon,
+        }
+      );
 
-      this.filtersOpen = false;
-      this.detailsActivityOpen = false;
-      this.weatherReportOpen = false;
-      this.detailsSkiAreaOpen = true;
-    };
+      const action = async () => {
+        const details = await requestSkiAreaDetails({
+          Id: skiArea.Id,
+        });
+        if (details) {
+          this.currentSkiArea = {
+            ...details,
+          };
+        }
 
-    marker.on("mousedown", action);
-    skiArea_layer_array.push(marker);
-  });
+        this.filtersOpen = false;
+        this.detailsActivityOpen = false;
+        this.weatherReportOpen = false;
+        this.detailsSkiAreaOpen = true;
+      };
+
+      marker.on("mousedown", action);
+      skiArea_layer_array.push(marker);
+    });
 
   if (!this.language) {
     this.language = get_system_language();

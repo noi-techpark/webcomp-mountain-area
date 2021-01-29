@@ -8,9 +8,10 @@ export const LANGUAGES = {
 
 export const STATE_DEFAULT_FILTERS = {
   radius: "0",
-  activityType: "",
-  skiArea: "",
+  activityType: [], // Array of strings
+  skiArea: [], // Array of strings
   isOpen: "",
+  locfilter: "",
 };
 
 export const STATE_DEFAULT_FILTERS_ACCORDIONS_OPEN = {

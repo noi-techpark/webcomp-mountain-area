@@ -23,9 +23,7 @@
   "searchTags": ["mountain"],
   "dist": {
     "basePath": "dist",
-    "files": [
-      "webcomp-mountain-area.js"
-    ]
+    "files": ["webcomp-mountain-area.js"]
   },
   "configuration": {
     "tagName": "webcomp-mountain-area",
@@ -36,7 +34,7 @@
         "label": "Width of the component as css property (es: '500px' or '100%')",
         "required": false,
         "options": {
-            "default": "100%"
+          "default": "100%"
         }
       },
       {
@@ -45,7 +43,7 @@
         "label": "Height of the component as css property (es: '500px' or '100%')",
         "required": false,
         "options": {
-            "default": "500px"
+          "default": "500px"
         }
       },
       {
@@ -92,6 +90,51 @@
         "required": true,
         "options": {
           "default": "https://1.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?apiKey="
+        }
+      },
+      {
+        "key": "filterRadius",
+        "type": "text",
+        "label": "The radius expressed in kilometers with which to filter events. Default value is 0.",
+        "required": true,
+        "options": {
+          "default": "5"
+        }
+      },
+      {
+        "key": "disablePOIDirections",
+        "type": "boolean",
+        "label": "If set the road directions are hidden",
+        "required": false,
+        "options": {
+          "default": ""
+        }
+      },
+      {
+        "key": "skiAreaFilter",
+        "type": "text",
+        "label": "Filter activities and areas by skiArea ids. Default is []",
+        "required": false,
+        "options": {
+          "default": "[]"
+        }
+      },
+      {
+        "key": "disableMeteo",
+        "type": "boolean",
+        "label": "If set the meteo button is hidden",
+        "required": false,
+        "options": {
+          "default": ""
+        }
+      },
+      {
+        "key": "activitiesFilter",
+        "type": "text",
+        "label": "If set, all the activities are filtered by the bitmask values in the array.",
+        "required": false,
+        "options": {
+          "default": "[]"
         }
       }
     ]

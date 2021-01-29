@@ -22,7 +22,11 @@ Include the webcompscript file `dist/webcomp-mountain-area.js` in your HTML and 
     language="it"
     mapAttribution='Map Tiles &copy; <a href="http://developer.here.com">HERE</a>'
     currentLocation='{ "lat": 46.31, "lng": 11.26 }'
-    tiles-url="https://1.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?apiKey=">
+    tiles-url="https://1.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?apiKey="
+    disablePOIDirections
+    disableMeteo
+    skiAreaFilter='["SKI4972D41A8DC042F88190C154D9CC8A8E"]'
+    activitiesFilter="[8,16]">
 </webcomp-mountain-area>
 ```
 
@@ -70,6 +74,31 @@ Set the URL of the API that provides the tiles.
 
 Example: `"https://1.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?apiKey="`
 
+#### filterRadius
+
+The radius expressed in kilometers with which to filter events. Default value is 0.
+
+Example: `"5"`
+
+#### disablePOIDirections
+
+If set the road directions are hidden
+
+#### skiAreaFilter
+
+Filter activities and areas by skiArea ids. Default is `[]`.
+
+Example: `'["SKI4972D41A8DC042F88190C154D9CC8A8E", "SKI28F1AE811BE8418DBCCACBAA604272C8", "SKIC57DA31F859141A1802E86B410FEBD70"]'`
+
+#### disableMeteo
+
+If set the meteo button is hidden.
+
+#### activitiesFilter
+
+If set, all the activities are filtered by the bitmask values in the array.
+
+Example: `"[8,16]"`
 
 ## Getting started
 

@@ -3,6 +3,11 @@ export const observedProperties = {
   width: { type: String },
   fontFamily: { type: String },
   language: { type: String },
+  filterRadius: { type: String },
+  disablePOIDirections: { type: Boolean },
+  disableMeteo: { type: Boolean },
+  skiAreaFilter: { type: Array },
+  activitiesFilter: { type: Array },
 
   mobileOpen: { type: Boolean },
   isMobile: { type: Boolean },

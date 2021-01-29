@@ -47,17 +47,19 @@ export function render__mapControls() {
             ></wc-button>
           </div>`
         : ""}
-      <div class="mt-16px">
-        <wc-button
-          @click="${() => {
-            this.detailsSkiAreaOpen = false;
-            this.detailsActivityOpen = false;
-            this.weatherReportOpen = !this.weatherReportOpen;
-          }}"
-          type="square"
-          .image="${sunCloudImage}"
-        ></wc-button>
-      </div>
+      ${!this.disableMeteo
+        ? html`<div class="mt-16px">
+            <wc-button
+              @click="${() => {
+                this.detailsSkiAreaOpen = false;
+                this.detailsActivityOpen = false;
+                this.weatherReportOpen = !this.weatherReportOpen;
+              }}"
+              type="square"
+              .image="${sunCloudImage}"
+            ></wc-button>
+          </div>`
+        : ""}
       <div class="mt-16px">
         <wc-button
           @click="${handleBtnCenterMap}"
@@ -82,14 +84,3 @@ export function render__mapControls() {
     </div>
   `;
 }
-
-/* <div
-        @click=${() => {
-          this.handleFullScreenMap();
-        }}
-        class=${`map_controls__button ${
-          isMobile() && !this.mobile_open ? "" : `d-none`
-        }`}
-      >
-        <img src=${expandImage} alt="" />
-      </div> */

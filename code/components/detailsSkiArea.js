@@ -34,10 +34,15 @@ ${dayjs(element.Start).format("DD/MM/YYYY")} - ${dayjs(element.Stop).format(
           .type="title"
           .tTitle="${Title}"
           tLinkedTagText="Ski area"
-          .tOptionalLink="${{
-            text: t["directions"][this.language],
-            url: `http://www.google.com/maps/place/${Latitude},${Longitude}`,
-          }}"
+          .tOptionalLink="${!this.disablePOIDirections
+            ? {
+                text: t["directions"][this.language],
+                url: `http://www.google.com/maps/place/${Latitude},${Longitude}`,
+              }
+            : {
+                text: "",
+                url: "",
+              }}"
           .closeModalAction="${() => {
             this.filtersOpen = false;
             this.detailsActivityOpen = false;
