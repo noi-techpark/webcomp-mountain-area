@@ -103,7 +103,7 @@
       },
       {
         "key": "disablePOIDirections",
-        "type": "bool",
+        "type": "null",
         "label": "If set the road directions are hidden",
         "required": false,
         "options": {
@@ -121,7 +121,7 @@
       },
       {
         "key": "disableMeteo",
-        "type": "bool",
+        "type": "null",
         "label": "If set the meteo button is hidden",
         "required": false,
         "options": {
