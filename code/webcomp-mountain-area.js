@@ -143,6 +143,8 @@ class MountainArea extends BaseMountainArea {
   );
 
   render() {
+    console.log(this.currentLocation);
+
     if (!this.tiles_url) {
       return html`
         <p style="color:red">Required attribute \`tiles_url\` is missing</p>
