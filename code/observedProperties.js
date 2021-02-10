@@ -17,7 +17,7 @@ export const observedProperties = {
   isLoading: { type: Boolean },
 
   hereMapsQuery: { type: String },
-  hereMapsPlacesFound: { type: Array },
+  searchPlacesFound: { type: Array },
   mapAttribution: { type: String },
 
   currentSkiArea: { type: Object },
