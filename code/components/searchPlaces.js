@@ -87,6 +87,7 @@ export function render_searchPlaces() {
     `;
   };
 
+  console.log(this.poiFilters);
   let filtersNumber = countFilters(this.poiFilters);
 
   return html`

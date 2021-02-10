@@ -57,10 +57,10 @@ export function countFilters(filters) {
   if (filters.radius !== "0") {
     filtersNumber = filtersNumber + 1;
   }
-  if (filters.activityType !== "") {
+  if (filters.activityType.length) {
     filtersNumber = filtersNumber + 1;
   }
-  if (filters.skiArea !== "") {
+  if (filters.skiArea.length) {
     filtersNumber = filtersNumber + 1;
   }
 

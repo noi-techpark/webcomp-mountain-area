@@ -62,6 +62,7 @@ class MountainArea extends BaseMountainArea {
       "resize",
       _debounce(this.handleWindowResize.bind(this), 150)
     );
+
     if (this.filterRadius && parseFloat(this.filterRadius)) {
       this.poiFilters = {
         ...this.poiFilters,
@@ -69,19 +70,21 @@ class MountainArea extends BaseMountainArea {
       };
     }
 
-    if (this.skiAreaFilter.length && this.skiAreaFilter !== undefined) {
+    if (this.skiAreaFilter !== undefined && this.skiAreaFilter.length) {
       this.poiFilters = {
         ...this.poiFilters,
         skiArea: this.skiAreaFilter,
       };
     }
-    if (this.activitiesFilter.length && this.activitiesFilter !== undefined) {
+
+    if (this.activitiesFilter !== undefined && this.activitiesFilter.length) {
       this.poiFilters = {
         ...this.poiFilters,
         activityType: this.activitiesFilter,
       };
     }
   }
+
   disconnectedCallback() {
     window.removeEventListener("resize", this.handleWindowResize.bind(this));
     super.disconnectedCallback();
