@@ -63,6 +63,9 @@ export function countFilters(filters) {
   if (filters.skiArea.length) {
     filtersNumber = filtersNumber + 1;
   }
+  if (filters.isOpen && filters.isOpen !== "") {
+    filtersNumber = filtersNumber + 1;
+  }
 
   return filtersNumber;
 }
