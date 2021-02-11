@@ -1,7 +1,7 @@
 {
   "title": "Mountain Area Webcomponent",
-  "description": "This web component shows all ski areas provided by the Open Data Hub.",
-  "descriptionAbstract": "A widget that allows to easily integrate the map view of the ski areas and winter activities in South Tyrol or near a location.",
+  "description": "A widget that allows to easily integrate the map view of the ski areas and winter activities in South Tyrol or near a location.",
+  "descriptionAbstract": "This web component shows all ski areas provided by the Open Data Hub.",
   "license": "AGPL-3.0-or-later",
   "copyrightHolders": [
     {
@@ -98,7 +98,7 @@
         "label": "The radius expressed in kilometers with which to filter events. Default value is 0.",
         "required": true,
         "options": {
-          "default": "5"
+          "default": "0"
         }
       },
       {
