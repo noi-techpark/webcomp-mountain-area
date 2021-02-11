@@ -34,20 +34,31 @@
     <div class="container mt-5">
       <div class="row">
         <div class="col-12">
-          <pre>width="100%" height="500px"</pre>
+          <pre>width="100%"
+height="500px"
+fontFamily="Arial"
+language="it"
+mapAttribution='Map Tiles &copy; <a href="http://developer.here.com">HERE</a>'
+currentLocation='{ "lat": 50.31, "lng": 14.26 }'
+tiles-url="https://1.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?apiKey="
+-filterRadius="5"
+disablePOIDirections
+disableMeteo
+-skiAreaFilter='["SKI4972D41A8DC042F88190C154D9CC8A8E"]'
+-activitiesFilter="[8,16,4096]"</pre>
           <webcomp-mountain-area
             width="100%"
             height="500px"
             fontFamily="Arial"
             language="it"
             mapAttribution='Map Tiles &copy; <a href="http://developer.here.com">HERE</a>'
-            currentLocation='{ "lat": 46.31, "lng": 11.26 }'
+            currentLocation='{ "lat": 50.31, "lng": 14.26 }'
             tiles-url="https://1.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?apiKey="
             -filterRadius="5"
             disablePOIDirections
             disableMeteo
-            skiAreaFilter='["SKI4972D41A8DC042F88190C154D9CC8A8E"]'
-            activitiesFilter="[8,16,4096]"
+            -skiAreaFilter='["SKI4972D41A8DC042F88190C154D9CC8A8E"]'
+            -activitiesFilter="[8,16,4096]"
           ></webcomp-mountain-area>
         </div>
       </div>

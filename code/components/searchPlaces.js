@@ -11,14 +11,14 @@ export function render_searchPlaces() {
       this.debounced__request__get_coordinates_from_search(value);
       this.filtersOpen = false;
     } else {
-      this.hereMapsPlacesFound = [];
+      this.searchPlacesFound = [];
     }
   };
 
   const manage_map = (lat, lng) => {
     this.currentLocation = { lat: parseFloat(lat), lng: parseFloat(lng) };
     this.currentSkiArea = {};
-    this.hereMapsPlacesFound = [];
+    this.searchPlacesFound = [];
     this.filtersOpen = false;
     this.map.flyTo([lat, lng], 15);
     this.map.removeLayer(this.layer_user);
@@ -49,7 +49,7 @@ export function render_searchPlaces() {
 
   const handleMoveToPlace = (lat, lng) => {
     this.isLoading = true;
-    this.hereMapsPlacesFound = [];
+    this.searchPlacesFound = [];
     this.hereMapsQuery = "";
     manage_map(lat, lng);
   };
@@ -71,7 +71,7 @@ export function render_searchPlaces() {
             <img class="" src="${findPositionBlueIcon}" alt="" />
             ${t.my_location[this.language]}
           </li>
-          ${this.hereMapsPlacesFound.map((o) => {
+          ${this.searchPlacesFound.map((o) => {
             return html`
               <li
                 @click="${() =>
@@ -87,6 +87,7 @@ export function render_searchPlaces() {
     `;
   };
 
+  console.log(this.poiFilters);
   let filtersNumber = countFilters(this.poiFilters);
 
   return html`
@@ -100,7 +101,7 @@ export function render_searchPlaces() {
         @focus=${handle_focus_input}
       ></wc-searchbar>
 
-      ${this.hereMapsPlacesFound.length && this.hereMapsQuery.length
+      ${this.searchPlacesFound.length && this.hereMapsQuery.length
         ? render__places_list()
         : ""}
     </div>

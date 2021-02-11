@@ -8,6 +8,7 @@ export const observedProperties = {
   disableMeteo: { type: Boolean },
   skiAreaFilter: { type: Array },
   activitiesFilter: { type: Array },
+  currentLocation: { type: Object },
 
   mobileOpen: { type: Boolean },
   isMobile: { type: Boolean },
@@ -17,9 +18,10 @@ export const observedProperties = {
   isLoading: { type: Boolean },
 
   hereMapsQuery: { type: String },
-  hereMapsPlacesFound: { type: Array },
+  searchPlacesFound: { type: Array },
   mapAttribution: { type: String },
 
+  currentSkiArea: { type: Object },
   currentSkiArea: { type: Object },
   currentActivity: { type: Object },
 

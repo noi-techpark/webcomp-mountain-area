@@ -25,7 +25,7 @@ export class BaseMountainArea extends LitElement {
     this.map = undefined;
     this.currentLocation = { lat: 46.479, lng: 11.331 };
 
-    this.hereMapsPlacesFound = [];
+    this.searchPlacesFound = [];
     this.hereMapsQuery = "";
 
     this.currentSkiArea = {};

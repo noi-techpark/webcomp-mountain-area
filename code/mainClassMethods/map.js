@@ -39,10 +39,8 @@ export async function initializeMap() {
   if (STORE_position.length) {
     this.map.setView(STORE_position, STORE_zoomLevel);
   } else {
-    this.map.setView(
-      { lat: this.currentLocation.lat, lon: this.currentLocation.lng },
-      STORE_zoomLevel
-    );
+    const { lat, lng } = this.currentLocation;
+    this.map.setView({ lat, lon: lng }, STORE_zoomLevel);
   }
 }
 
