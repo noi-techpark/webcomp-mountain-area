@@ -42,12 +42,12 @@ export const t = {
   search: {
     it: "Cerca",
     en: "Seach",
-    de: "Seach",
+    de: "Suche",
   },
   my_location: {
     it: "La mia posizione",
     en: "My location",
-    de: "My location",
+    de: "Mein Standort",
   },
   tag__free: {
     it: "Libero",
@@ -228,24 +228,24 @@ export const t = {
   },
 
   totalKilometers: {
-    it: "Chilometri totali",
-    en: "Total Kilometers",
-    de: "Gesamtkilometer",
+    it: "Lunghezza totale (Km)",
+    en: "Total lenght (Km)",
+    de: "Gesamt Lange",
   },
   kilometersBlue: {
     it: "Chilometri blu",
-    en: "Kilometers Blue",
-    de: "Kilometer blau",
+    en: "Blue Kilometers",
+    de: "Blaue Kilometers",
   },
   kilometersRed: {
     it: "Chilometri rossi",
-    en: "Kilometers Red",
-    de: "Kilometers Rot",
+    en: "Red Kilometers Red",
+    de: "Rote Kilometers",
   },
   kilometersBlack: {
     it: "Chilometri neri",
-    en: "Kilometers Black",
-    de: "Kilometer schwarz",
+    en: "Black Kilometers Black",
+    de: "Schwarze Kilometers",
   },
   directions: {
     it: "Indicazioni stradali",
