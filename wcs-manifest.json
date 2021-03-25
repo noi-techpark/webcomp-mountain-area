@@ -20,7 +20,7 @@
     }
   ],
   "image": "wcs-logo.png",
-  "searchTags": ["mountain"],
+  "searchTags": ["mountain","tourism"],
   "dist": {
     "basePath": "dist",
     "files": ["webcomp-mountain-area.js"]
