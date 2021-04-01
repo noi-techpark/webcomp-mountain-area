@@ -2,7 +2,7 @@ export const t = {
   openTheMap: {
     it: "Apri la mappa",
     en: "Open the map",
-    de: "Öffnen Sie die Karte",
+    de: "Öffne die Karte",
   },
   events: {
     it: "Eventi",
@@ -37,17 +37,17 @@ export const t = {
   endDate: {
     it: "Data di fine",
     en: "End date",
-    de: "Endtermin",
+    de: "Enddatum",
   },
   search: {
     it: "Cerca",
-    en: "Seach",
-    de: "Seach",
+    en: "Search",
+    de: "Suche",
   },
   my_location: {
     it: "La mia posizione",
     en: "My location",
-    de: "My location",
+    de: "Mein Standort",
   },
   tag__free: {
     it: "Libero",
@@ -68,7 +68,7 @@ export const t = {
   cancelFilters: {
     it: "Annulla filtri",
     en: "Cancel filters",
-    de: "Filter abbrechen",
+    de: "Filter verwerfen",
   },
   description: {
     it: "Descrizione",
@@ -78,7 +78,7 @@ export const t = {
   season: {
     it: "Stagione",
     en: "Season",
-    de: "Jahreszeit",
+    de: "Saison",
   },
   category: {
     it: "Categoria",
@@ -177,9 +177,9 @@ export const t = {
   },
   // List
   shortname: {
-    it: "SHORTNAME",
-    en: "SHORTNAME",
-    de: "SHORTNAME",
+    it: "NOME",
+    en: "NAME",
+    de: "NAME",
   },
   location: {
     it: "POSIZIONE",
@@ -194,12 +194,12 @@ export const t = {
   prev: {
     it: "prec.",
     en: "prev.",
-    de: "früher",
+    de: "zurück",
   },
   next: {
     it: "pros.",
     en: "next",
-    de: "nächste",
+    de: "weiter",
   },
   details: {
     it: "Dettagli",
@@ -214,7 +214,7 @@ export const t = {
   to: {
     it: "al",
     en: "to",
-    de: "zu",
+    de: "bis",
   },
   opening: {
     it: "Apertura",
@@ -228,31 +228,25 @@ export const t = {
   },
 
   totalKilometers: {
-    it: "Chilometri totali",
-    en: "Total Kilometers",
-    de: "Gesamtkilometer",
+    it: "Lunghezza totale (Km)",
+    en: "Total length (Km)",
+    de: "Gesamtlänge",
   },
   kilometersBlue: {
     it: "Chilometri blu",
     en: "Kilometers Blue",
-    de: "Kilometer blau",
+    de: "Kilometer Blau",
   },
   kilometersRed: {
     it: "Chilometri rossi",
     en: "Kilometers Red",
-    de: "Kilometers Rot",
+    de: "Kilometer Rot",
   },
   kilometersBlack: {
     it: "Chilometri neri",
     en: "Kilometers Black",
-    de: "Kilometer schwarz",
+    de: "Kilometer Schwarz",
   },
-  directions: {
-    it: "Indicazioni stradali",
-    en: "Directions",
-    de: "Richtungen",
-  },
-
   difficulty: {
     it: "Difficoltà",
     en: "Difficulty",
@@ -273,7 +267,6 @@ export const t = {
     en: "Open",
     de: "Öffnen",
   },
-
   yes: {
     it: "Sì",
     en: "Yes",
@@ -302,18 +295,17 @@ export const t = {
   downloadTheBulletin: {
     it: "Scarica il bollettino",
     en: "Download the bulletin",
-    de: "Laden Sie das Bulletin herunter",
+    de: "Bulletin herunterladen",
   },
   evolution: {
     it: "Evoluzione",
     en: "Evolution",
     de: "Evolution",
   },
-
   maximum: {
     it: "Massime",
     en: "Maximum",
-    de: "Maximal",
+    de: "Maximum",
   },
   minimum: {
     it: "Minime",
@@ -333,9 +325,9 @@ export const t = {
   },
 
   zerolimit: {
-    it: "Zerolimit",
-    en: "Zerolimit",
-    de: "Zerolimit",
+    it: "Zero degree limit",
+    en: "Limite di zero gradi",
+    de: "Nullgradgrenze",
   },
   sunrise: {
     it: "Alba",
