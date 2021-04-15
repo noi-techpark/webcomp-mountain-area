@@ -1,5 +1,7 @@
 # Mountain area - Web component
 
+[![REUSE status](https://api.reuse.software/badge/github.com/noi-techpark/webcomp-mountain-area)](https://api.reuse.software/info/github.com/noi-techpark/webcomp-mountain-area)
+
 A web component that shows the mountains data stored in the Open Data Hub.
 
 ## Table of contents
