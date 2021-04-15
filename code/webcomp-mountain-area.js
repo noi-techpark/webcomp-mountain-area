@@ -153,20 +153,25 @@ class MountainArea extends BaseMountainArea {
 
     let isSmallWidth = false;
     let isSmallHeight = false;
+    let height = `${this.height}`;
+
     if (this.width.includes("px")) {
       isSmallWidth = parseInt(this.width.replace("px")) <= 400;
     } else if (this.width.includes("%")) {
-      if (this.shadowRoot.querySelector(".meteo_generic")) {
+      if (this.shadowRoot.querySelector(".mountainArea")) {
         isSmallWidth =
-          this.shadowRoot.querySelector(".meteo_generic").clientWidth <= 400;
+          this.shadowRoot.querySelector(".mountainArea").clientWidth <= 400;
       }
     }
     if (this.height.includes("px")) {
       isSmallHeight = parseInt(this.height.replace("px")) <= 400;
     } else if (this.height.includes("%")) {
-      if (this.shadowRoot.querySelector(".meteo_generic")) {
+      if (this.shadowRoot.querySelector(".mountainArea")) {
+        height = `${
+          this.shadowRoot.querySelector(".mountainArea").clientHeight
+        }px`;
         isSmallHeight =
-          this.shadowRoot.querySelector(".meteo_generic").clientHeight <= 400;
+          this.shadowRoot.querySelector(".mountainArea").clientHeight <= 400;
       }
     }
 
@@ -174,7 +179,7 @@ class MountainArea extends BaseMountainArea {
       <style>
         * {
           --width: ${this.width};
-          --height: ${this.height};
+          --height: ${height};
           --w-c-font-family: ${this.fontFamily};
         }
       </style>
