@@ -1,5 +1,6 @@
 import Leaflet from "leaflet";
-import leaflet_mrkcls from "leaflet.markercluster";
+// import leaflet_mrkcls from "leaflet.markercluster";
+import { MarkerClusterGroup } from "leaflet.markercluster";
 import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 import {
@@ -139,6 +140,7 @@ export async function drawMountainAreaOnMap() {
       );
 
       const action = async () => {
+        this.searchPlacesFound = {};
         const details = await requestSkiAreaDetails({
           Id: skiArea.Id,
         });
@@ -248,7 +250,7 @@ export async function drawMountainAreaOnMap() {
 
   const activities_layer = Leaflet.layerGroup(activities_layer_array, {});
 
-  this.layer_activities = new leaflet_mrkcls.MarkerClusterGroup({
+  this.layer_activities = new MarkerClusterGroup({
     showCoverageOnHover: false,
     chunkedLoading: true,
     iconCreateFunction(cluster) {
