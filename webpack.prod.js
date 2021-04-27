@@ -2,6 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 var dotenv = require("dotenv").config({ path: __dirname + "/.env" });
 
+
 module.exports = {
   mode: "production",
   entry: path.resolve(__dirname, "./code/webcomp-mountain-area.js"),
