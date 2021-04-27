@@ -3,7 +3,7 @@ import leafletStyle from "leaflet/dist/leaflet.css";
 import { css, html, unsafeCSS } from "lit-element";
 import { classMap } from "lit-html/directives/class-map";
 import { debounce as _debounce } from "lodash";
-import { requestGetCoordinatesFromSearch } from "./api/hereMaps";
+import { requestGetCoordinatesFromSearch } from "./api/poi";
 import { requestWeather } from "./api/weather";
 import { BaseMountainArea } from "./baseClass";
 import { render_details_activity } from "./components/detailsActivity";
@@ -143,8 +143,6 @@ class MountainArea extends BaseMountainArea {
   );
 
   render() {
-    console.log(this.currentLocation);
-
     if (!this.tiles_url) {
       return html`
         <p style="color:red">Required attribute \`tiles_url\` is missing</p>

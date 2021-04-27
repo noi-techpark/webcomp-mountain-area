@@ -1,16 +1,21 @@
 const path = require("path");
 const webpack = require("webpack");
-const Dotenv = require("dotenv-webpack");
+var dotenv = require("dotenv").config({ path: __dirname + "/.env" });
 
 module.exports = {
   mode: "development",
+  target: "web",
   entry: path.resolve(__dirname, "./code/webcomp-mountain-area.js"),
-  watch: true,
+  // watch: true,
   output: {
     path: path.resolve(__dirname, "./work/scripts"),
     filename: "webcomp-mountain-area.js",
   },
-  plugins: [new Dotenv()],
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env.DOTENV": JSON.stringify(dotenv.parsed),
+    }),
+  ],
   // webpack-dev-server configuration
   devServer: {
     contentBase: path.resolve(__dirname, "./work"),
@@ -18,7 +23,7 @@ module.exports = {
     watchContentBase: true,
     compress: true,
     port: 8080,
-    open: true,
+    open: false,
     openPage: "",
     overlay: true,
   },
