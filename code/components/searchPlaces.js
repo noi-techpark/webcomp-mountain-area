@@ -9,6 +9,8 @@ export function render_searchPlaces() {
     if (value) {
       this.hereMapsQuery = value;
       this.debounced__request__get_coordinates_from_search(value);
+      this.detailsSkiAreaOpen = false;
+      this.detailsActivityOpen = false;
       this.filtersOpen = false;
     } else {
       this.searchPlacesFound = {};
