@@ -20,10 +20,18 @@
     }
   ],
   "image": "wcs-logo.png",
-  "searchTags": ["mountain","tourism","map","ski"],
+  "searchTags": [
+    "mountain",
+    "tourism",
+    "map",
+    "ski"
+  ],
   "dist": {
     "basePath": "dist",
-    "files": ["odh-mountain-area.js"]
+    "files": [
+      "odh-mountain-area.js.LICENSE.txt",
+      "odh-mountain-area.js"
+    ]
   },
   "configuration": {
     "tagName": "odh-mountain-area",
@@ -52,7 +60,11 @@
         "label": "Two letter key for the language to be used, if omitted the widget will use the language of the browser (navigator.language[?s]) if supported. Fallback is `en`",
         "required": false,
         "options": {
-          "values": ["en", "de", "it"],
+          "values": [
+            "en",
+            "de",
+            "it"
+          ],
           "default": "en"
         }
       },
