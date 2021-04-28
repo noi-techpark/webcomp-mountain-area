@@ -1,21 +1,50 @@
 # Mountain area - Web component
 
+[![REUSE status](https://api.reuse.software/badge/github.com/noi-techpark/webcomp-mountain-area)](https://api.reuse.software/info/github.com/noi-techpark/webcomp-mountain-area)
+
 A web component that shows the mountains data stored in the Open Data Hub.
 
-## Table of contents
+Do you want to see it in action? Go to our [web component store](https://webcomponents.opendatahub.bz.it/webcomponent/430eead9-0bbc-4832-b4c0-78236d77a36b)!
 
-- [Usage](#usage)
-- [Gettings started](#getting-started)
-- [Deployment](#deployment)
-- [Docker environment](#docker-environment)
-- [Information](#information)
-<!-- - [Tests and linting](#tests-and-linting) -->
+- [Mountain area - Web component](#mountain-area---web-component)
+  - [Usage](#usage)
+    - [Attributes](#attributes)
+      - [width](#width)
+      - [height](#height)
+      - [fontFamily](#fontfamily)
+      - [language](#language)
+      - [mapAttribution](#mapattribution)
+      - [currentLocation](#currentlocation)
+      - [tiles-url](#tiles-url)
+      - [filterRadius](#filterradius)
+      - [disablePOIDirections](#disablepoidirections)
+      - [skiAreaFilter](#skiareafilter)
+      - [disableMeteo](#disablemeteo)
+      - [activitiesFilter](#activitiesfilter)
+  - [Getting started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Source code](#source-code)
+    - [.env](#env)
+    - [Dependencies](#dependencies)
+    - [Build](#build)
+  - [Docker environment](#docker-environment)
+    - [Installation](#installation)
+    - [Dependenices](#dependenices)
+    - [Start and stop the containers](#start-and-stop-the-containers)
+    - [Running commands inside the container](#running-commands-inside-the-container)
+  - [Information](#information)
+    - [Support](#support)
+    - [Contributing](#contributing)
+    - [Documentation](#documentation)
+    - [Boilerplate](#boilerplate)
+    - [License](#license)
+
 
 ## Usage
 
-Include the webcompscript file `dist/webcomp-mountain-area.js` in your HTML and define the web component like this:
+Include the webcompscript file `dist/odh-mountain-area.js` in your HTML and define the web component like this:
 ```html
-<webcomp-mountain-area
+<odh-mountain-area
     width="100%"
     height="500px"
     fontFamily="Arial"
@@ -27,7 +56,7 @@ Include the webcompscript file `dist/webcomp-mountain-area.js` in your HTML and 
     disableMeteo
     skiAreaFilter='["SKI4972D41A8DC042F88190C154D9CC8A8E"]'
     activitiesFilter="[8,16]">
-</webcomp-mountain-area>
+</odh-mountain-area>
 ```
 
 ### Attributes
@@ -135,7 +164,7 @@ Create a `.env` file in the main directory.
 Fill it with this content:
 
 ```
-HEREMAP_API_KEY=YourKey
+HEREMAPS_API_KEY=YourKey
 ```
 
 Replace `YourKey` with your API token to use the tiles and the search bar.

@@ -1,5 +1,6 @@
 import Leaflet from "leaflet";
-import leaflet_mrkcls from "leaflet.markercluster";
+// import leaflet_mrkcls from "leaflet.markercluster";
+import { MarkerClusterGroup } from "leaflet.markercluster";
 import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 import {
@@ -139,6 +140,13 @@ export async function drawMountainAreaOnMap() {
       );
 
       const action = async () => {
+        this.searchPlacesFound = {};
+        if (this.trackPolyline) {
+          this.trackPolyline.remove(this.map);
+        }
+        if (this.marker_arrivalPoint) {
+          this.marker_arrivalPoint.remove(this.map);
+        }
         const details = await requestSkiAreaDetails({
           Id: skiArea.Id,
         });
@@ -192,42 +200,51 @@ export async function drawMountainAreaOnMap() {
       );
 
       const action = async () => {
+        this.searchPlacesFound = {};
         const details = await requestActivityDetails({
           Id: activity.Id,
         });
-        if (details && details.GpsTrack) {
-          // If the activity has a GpsTrack show it
-          if (details.GpsTrack.length) {
-            const gpx = await requestGPX({
-              code: details.GpsTrack[0].GpxTrackUrl.split("/gpx/").pop(),
-            });
-            const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(gpx, "text/xml");
-            const latlngs = Array.from(
-              xmlDoc.getElementsByTagName("trkpt")
-            ).map((t) => {
-              const lat = t.attributes.getNamedItem("lat").value;
-              const lon = t.attributes.getNamedItem("lon").value;
-              return [lat, lon];
-            });
-            if (this.trackPolyline) {
-              this.trackPolyline.remove(this.map);
-            }
-            if (this.marker_arrivalPoint) {
-              this.marker_arrivalPoint.remove(this.map);
-            }
-            drawTrack.bind(this)(latlngs, details.GpsPoints.arrivalpoint);
-          } else {
-            // Else show the normal POI
-            if (STORE_zoomLevel < 16) {
-              STORE_zoomLevel = this.map._zoom + 2;
-            }
-            STORE_position = [marker_position.lat, marker_position.lng];
+        if (details) {
+          if (this.trackPolyline) {
+            this.trackPolyline.remove(this.map);
+          }
+          if (this.marker_arrivalPoint) {
+            this.marker_arrivalPoint.remove(this.map);
+          }
+          if (details.GpsTrack) {
+            // If the activity has a GpsTrack show it
+            if (details.GpsTrack.length) {
+              const gpx = await requestGPX({
+                code: details.GpsTrack[0].GpxTrackUrl.split("/gpx/").pop(),
+              });
+              const parser = new DOMParser();
+              const xmlDoc = parser.parseFromString(gpx, "text/xml");
+              const latlngs = Array.from(
+                xmlDoc.getElementsByTagName("trkpt")
+              ).map((t) => {
+                const lat = t.attributes.getNamedItem("lat").value;
+                const lon = t.attributes.getNamedItem("lon").value;
+                return [lat, lon];
+              });
+              // if (this.trackPolyline) {
+              //   this.trackPolyline.remove(this.map);
+              // }
+              // if (this.marker_arrivalPoint) {
+              //   this.marker_arrivalPoint.remove(this.map);
+              // }
+              drawTrack.bind(this)(latlngs, details.GpsPoints.arrivalpoint);
+            } else {
+              // Else show the normal POI
+              if (STORE_zoomLevel < 16) {
+                STORE_zoomLevel = this.map._zoom + 2;
+              }
+              STORE_position = [marker_position.lat, marker_position.lng];
 
-            this.map.setView(
-              [marker_position.lat, marker_position.lng],
-              STORE_zoomLevel
-            );
+              this.map.setView(
+                [marker_position.lat, marker_position.lng],
+                STORE_zoomLevel
+              );
+            }
           }
 
           this.currentActivity = {
@@ -248,7 +265,7 @@ export async function drawMountainAreaOnMap() {
 
   const activities_layer = Leaflet.layerGroup(activities_layer_array, {});
 
-  this.layer_activities = new leaflet_mrkcls.MarkerClusterGroup({
+  this.layer_activities = new MarkerClusterGroup({
     showCoverageOnHover: false,
     chunkedLoading: true,
     iconCreateFunction(cluster) {

@@ -23,10 +23,10 @@
   "searchTags": ["mountain","tourism","map","ski"],
   "dist": {
     "basePath": "dist",
-    "files": ["webcomp-mountain-area.js"]
+    "files": ["odh-mountain-area.js"]
   },
   "configuration": {
-    "tagName": "webcomp-mountain-area",
+    "tagName": "odh-mountain-area",
     "options": [
       {
         "key": "width",

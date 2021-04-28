@@ -3,7 +3,7 @@ import leafletStyle from "leaflet/dist/leaflet.css";
 import { css, html, unsafeCSS } from "lit-element";
 import { classMap } from "lit-html/directives/class-map";
 import { debounce as _debounce } from "lodash";
-import { requestGetCoordinatesFromSearch } from "./api/hereMaps";
+import { requestGetCoordinatesFromSearch } from "./api/poi";
 import { requestWeather } from "./api/weather";
 import { BaseMountainArea } from "./baseClass";
 import { render_details_activity } from "./components/detailsActivity";
@@ -32,7 +32,7 @@ import "./shared_components/sideModalTabs/sideModalTabs";
 import "./shared_components/tag/tag";
 import { t } from "./translations";
 import { isMobile, LANGUAGES } from "./utils";
-import MountainAreaStyle from "./webcomp-mountain-area.scss";
+import MountainAreaStyle from "./odh-mountain-area.scss";
 
 class MountainArea extends BaseMountainArea {
   static get properties() {
@@ -143,8 +143,6 @@ class MountainArea extends BaseMountainArea {
   );
 
   render() {
-    console.log(this.currentLocation);
-
     if (!this.tiles_url) {
       return html`
         <p style="color:red">Required attribute \`tiles_url\` is missing</p>
@@ -153,20 +151,25 @@ class MountainArea extends BaseMountainArea {
 
     let isSmallWidth = false;
     let isSmallHeight = false;
+    let height = `${this.height}`;
+
     if (this.width.includes("px")) {
       isSmallWidth = parseInt(this.width.replace("px")) <= 400;
     } else if (this.width.includes("%")) {
-      if (this.shadowRoot.querySelector(".meteo_generic")) {
+      if (this.shadowRoot.querySelector(".mountainArea")) {
         isSmallWidth =
-          this.shadowRoot.querySelector(".meteo_generic").clientWidth <= 400;
+          this.shadowRoot.querySelector(".mountainArea").clientWidth <= 400;
       }
     }
     if (this.height.includes("px")) {
       isSmallHeight = parseInt(this.height.replace("px")) <= 400;
     } else if (this.height.includes("%")) {
-      if (this.shadowRoot.querySelector(".meteo_generic")) {
+      if (this.shadowRoot.querySelector(".mountainArea")) {
+        height = `${
+          this.shadowRoot.querySelector(".mountainArea").clientHeight
+        }px`;
         isSmallHeight =
-          this.shadowRoot.querySelector(".meteo_generic").clientHeight <= 400;
+          this.shadowRoot.querySelector(".mountainArea").clientHeight <= 400;
       }
     }
 
@@ -174,7 +177,7 @@ class MountainArea extends BaseMountainArea {
       <style>
         * {
           --width: ${this.width};
-          --height: ${this.height};
+          --height: ${height};
           --w-c-font-family: ${this.fontFamily};
         }
       </style>
@@ -250,5 +253,5 @@ class MountainArea extends BaseMountainArea {
   }
 }
 
-customElements.get("webcomp-mountain-area") ||
-  customElements.define("webcomp-mountain-area", MountainArea);
+customElements.get("odh-mountain-area") ||
+  customElements.define("odh-mountain-area", MountainArea);
