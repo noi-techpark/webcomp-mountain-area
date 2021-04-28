@@ -31,6 +31,12 @@
     "files": [
       "odh-mountain-area.js.LICENSE.txt",
       "odh-mountain-area.js"
+    ],
+    "scripts": [
+      {
+        "file": "odh-mountain-area.js",
+        "parameter": ""
+      }
     ]
   },
   "configuration": {
