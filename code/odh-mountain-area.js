@@ -32,7 +32,7 @@ import "./shared_components/sideModalTabs/sideModalTabs";
 import "./shared_components/tag/tag";
 import { t } from "./translations";
 import { isMobile, LANGUAGES } from "./utils";
-import MountainAreaStyle from "./webcomp-mountain-area.scss";
+import MountainAreaStyle from "./odh-mountain-area.scss";
 
 class MountainArea extends BaseMountainArea {
   static get properties() {
@@ -253,5 +253,5 @@ class MountainArea extends BaseMountainArea {
   }
 }
 
-customElements.get("webcomp-mountain-area") ||
-  customElements.define("webcomp-mountain-area", MountainArea);
+customElements.get("odh-mountain-area") ||
+  customElements.define("odh-mountain-area", MountainArea);

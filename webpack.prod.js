@@ -5,10 +5,10 @@ var dotenv = require("dotenv").config({ path: __dirname + "/.env" });
 
 module.exports = {
   mode: "production",
-  entry: path.resolve(__dirname, "./code/webcomp-mountain-area.js"),
+  entry: path.resolve(__dirname, "./code/odh-mountain-area.js"),
   output: {
     path: path.resolve(__dirname, "./dist"),
-    filename: "webcomp-mountain-area.js",
+    filename: "odh-mountain-area.js",
   },
   plugins: [
     new webpack.DefinePlugin({
