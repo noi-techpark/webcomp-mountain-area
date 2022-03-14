@@ -3,6 +3,7 @@
   "description": "A widget that allows to easily integrate the map view of the ski areas and winter activities in South Tyrol or nearby locations. In addition, it contains also a weather forecast widget.",
   "descriptionAbstract": "This web component shows ski areas, winter activities and weather data provided by the Open Data Hub.",
   "license": "AGPL-3.0-or-later",
+  "repositoryUrl": "https://github.com/noi-techpark/webcomp-mountain-area.git",
   "copyrightHolders": [
     {
       "name": "NOI",
