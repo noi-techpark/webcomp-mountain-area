@@ -3,14 +3,14 @@ import {
   BASE_PATH_TOURISM_ODHACTIVITYPOI,
   BASE_PATH_TOURISM_ODHACTIVITYPOI_REDUCED,
   BASE_PATH_TOURISM_SKIAREA,
+  ORIGIN
 } from "./config";
 
 const createUrlFilters = (filters, currentLocation) => {
   let radius = "";
   if (filters.radius && filters.radius !== "0") {
-    radius = `&latitude=${currentLocation.lat}&longitude=${
-      currentLocation.lng
-    }&radius=${parseInt(filters.radius) * 1000}`;
+    radius = `&latitude=${currentLocation.lat}&longitude=${currentLocation.lng
+      }&radius=${parseInt(filters.radius) * 1000}`;
   }
 
   let activityType = "";
@@ -34,13 +34,12 @@ const createUrlFilters = (filters, currentLocation) => {
 export const requestTourismSkiArea = async (filters, currentLocation) => {
   let radius = "";
   if (filters.radius && filters.radius !== "0") {
-    radius = `&latitude=${currentLocation.lat}&longitude=${
-      currentLocation.lng
-    }&radius=${parseInt(filters.radius) * 1000}`;
+    radius = `&latitude=${currentLocation.lat}&longitude=${currentLocation.lng
+      }&radius=${parseInt(filters.radius) * 1000}`;
   }
   try {
     const request = await fetch(
-      `${BASE_PATH_TOURISM_SKIAREA}?elements=0&fields=Id,Latitude,Longitude,Detail${radius}`
+      `${BASE_PATH_TOURISM_SKIAREA}?elements=0&fields=Id,Latitude,Longitude,Detail${radius}&` + ORIGIN
     );
     if (request.status !== 200) {
       throw new Error(request.statusText);
@@ -65,7 +64,7 @@ export const requestTourismODHActivityPoiType2 = async (
 ) => {
   try {
     const request = await fetch(
-      `${BASE_PATH_TOURISM_ODHACTIVITYPOI_REDUCED}?type=2&fields=Id,GpsInfo,IsOpen${createUrlFilters(
+      `${BASE_PATH_TOURISM_ODHACTIVITYPOI_REDUCED}?type=2&` + ORIGIN + `&fields=Id,GpsInfo,IsOpen${createUrlFilters(
         filters,
         currentLocation
       )}`
@@ -87,7 +86,7 @@ export const requestTourismODHActivityPoiType2 = async (
 
 export const requestODHActivityPoiTypes = async () => {
   try {
-    const request = await fetch(`${BASE_PATH_TOURISM}/ODHActivityPoiTypes`);
+    const request = await fetch(`${BASE_PATH_TOURISM}/ODHActivityPoiTypes?` + ORIGIN);
     if (request.status !== 200) {
       throw new Error(request.statusText);
     }
@@ -103,7 +102,7 @@ export const requestODHActivityPoiTypes = async () => {
 export const requestSkiAreaDetails = async ({ Id }) => {
   try {
     const request = await fetch(
-      `${BASE_PATH_TOURISM_SKIAREA}/${Id}?elements=0`
+      `${BASE_PATH_TOURISM_SKIAREA}/${Id}?elements=0&` + ORIGIN
     );
     if (request.status !== 200) {
       throw new Error(request.statusText);
@@ -118,7 +117,7 @@ export const requestSkiAreaDetails = async ({ Id }) => {
 export const requestActivityDetails = async ({ Id }) => {
   try {
     const request = await fetch(
-      `${BASE_PATH_TOURISM_ODHACTIVITYPOI}/${Id}?elements=0`
+      `${BASE_PATH_TOURISM_ODHACTIVITYPOI}/${Id}?elements=0&` + ORIGIN
     );
     if (request.status !== 200) {
       throw new Error(request.statusText);
@@ -133,7 +132,7 @@ export const requestActivityDetails = async ({ Id }) => {
 export const requestGPX = async ({ code }) => {
   try {
     const request = await fetch(
-      `https://tourism.opendatahub.bz.it/api/Activity/Gpx/${code}`
+      `${BASE_PATH_TOURISM}/Activity/Gpx/${code}&` + ORIGIN
     );
     if (request.status !== 200) {
       throw new Error(request.statusText);

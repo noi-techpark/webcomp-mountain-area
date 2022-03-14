@@ -1,4 +1,4 @@
-import { BASE_PATH_TOURISM_ODHACTIVITYPOI } from "./config";
+import { BASE_PATH_TOURISM_ODHACTIVITYPOI, ORIGIN } from "./config";
 
 export async function requestGetCoordinatesFromSearch(query) {
   const r = 150 * 1000;
@@ -30,7 +30,7 @@ export async function requestGetCoordinatesFromSearch(query) {
 
       let formattedTourismActivityPoiData = [];
       const tourismActivityPoiRequest = await fetch(
-        `${BASE_PATH_TOURISM_ODHACTIVITYPOI}?type=2&fields=Id,GpsInfo,Detail&searchfilter=${query}`
+        `${BASE_PATH_TOURISM_ODHACTIVITYPOI}?type=2&fields=Id,GpsInfo,Detail&searchfilter=${query}&` + ORIGIN
       );
       const tourismActivityPoiResponse = await tourismActivityPoiRequest.json();
 
@@ -87,7 +87,7 @@ export async function requestGetCoordinatesFromSearch(query) {
       //
 
       const tourismResponse = await fetch(
-        `https://tourism.opendatahub.bz.it/api/Poi?pagenumber=1&pagesize=10000&poitype=511&searchfilter=${query}`,
+        `${BASE_PATH_TOURISM}/Poi?pagenumber=1&pagesize=10000&poitype=511&searchfilter=${query}&` + ORIGIN,
         {
           method: "GET",
           headers: new Headers({
