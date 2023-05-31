@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: NOI Techpark <digital@noi.bz.it>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 import { html } from "lit-element";
 import findPositionBlueIcon from "../assets/find-position-blue.svg";
 // import { debounce, request__get_coordinates_from_search } from "../utils";

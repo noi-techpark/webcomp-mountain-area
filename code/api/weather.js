@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: NOI Techpark <digital@noi.bz.it>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 import { BASE_PATH_TOURISM, ORIGIN } from "./config";
 
 export const requestWeather = async (language) => {
