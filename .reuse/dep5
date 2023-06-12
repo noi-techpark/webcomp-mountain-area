@@ -3,6 +3,6 @@ Upstream-Name: webcomp-mountain-area
 Upstream-Contact: NOI Techpark <digital@noi.bz.it>
 Source: https://github.com/noi-techpark/webcomp-mountain-area
 
-Files: .github/* infrastructure/* .gitignore LICENSE.md .editorconfig .env.example *.png *.svg *.json
+Files: .github/* infrastructure/* .gitignore .pre-commit-config.yaml LICENSE.md .editorconfig .env.example *.png *.svg *.json
 Copyright: (c) NOI Techpark <digital@noi.bz.it>
 License: CC0-1.0
