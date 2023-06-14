@@ -12,7 +12,7 @@ SPDX-License-Identifier: CC0-1.0
 
 A web component that shows the mountains data stored in the Open Data Hub.
 
-Do you want to see it in action? Go to our [web component store](https://webcomponents.opendatahub.bz.it/webcomponent/430eead9-0bbc-4832-b4c0-78236d77a36b)!
+Do you want to see it in action? Go to our [web component store](https://webcomponents.opendatahub.com/webcomponent/430eead9-0bbc-4832-b4c0-78236d77a36b)!
 
 - [Mountain area - Web component](#mountain-area---web-component)
   - [Usage](#usage)
@@ -262,7 +262,7 @@ docker-compose run --rm app /bin/bash -c "npm run start"
 
 ### Support
 
-ToDo: For support, please contact [help@opendatahub.bz.it](mailto:help@opendatahub.bz.it).
+ToDo: For support, please contact [help@opendatahub.com](mailto:help@opendatahub.com).
 
 ### Contributing
 
