@@ -4,6 +4,7 @@
   "descriptionAbstract": "This web component shows ski areas, winter activities and weather data provided by the Open Data Hub.",
   "license": "AGPL-3.0-or-later",
   "repositoryUrl": "https://github.com/noi-techpark/webcomp-mountain-area.git",
+  "shortName": "mountain-area",
   "copyrightHolders": [
     {
       "name": "NOI",
