@@ -182,88 +182,90 @@ export async function drawMountainAreaOnMap() {
   // Activities
   activities.map((activity) => {
     const { GpsInfo } = activity;
-    const position = GpsInfo.filter((o) => {
-      return o.Gpstype === "position";
-    })[0];
+    if (GpsInfo !== null && GpsInfo !== undefined) {
+      const position = GpsInfo.filter((o) => {
+        return o.Gpstype === "position";
+      })[0];
 
-    if (position) {
-      const marker_position = getLatLongFromStationDetail({
-        x: position.Longitude,
-        y: position.Latitude,
-      });
-      const activity_icon = Leaflet.icon({
-        iconUrl: pinSnow,
-        iconSize: [36, 36],
-      });
-
-      const marker = Leaflet.marker(
-        [marker_position.lat, marker_position.lng],
-        {
-          icon: activity_icon,
-        }
-      );
-
-      const action = async () => {
-        this.searchPlacesFound = {};
-        const details = await requestActivityDetails({
-          Id: activity.Id,
+      if (position) {
+        const marker_position = getLatLongFromStationDetail({
+          x: position.Longitude,
+          y: position.Latitude,
         });
-        if (details) {
-          if (this.trackPolyline) {
-            this.trackPolyline.remove(this.map);
-          }
-          if (this.marker_arrivalPoint) {
-            this.marker_arrivalPoint.remove(this.map);
-          }
-          if (details.GpsTrack) {
-            // If the activity has a GpsTrack show it
-            if (details.GpsTrack.length) {
-              const gpx = await requestGPX({
-                code: details.GpsTrack[0].GpxTrackUrl.split("/gpx/").pop(),
-              });
-              const parser = new DOMParser();
-              const xmlDoc = parser.parseFromString(gpx, "text/xml");
-              const latlngs = Array.from(
-                xmlDoc.getElementsByTagName("trkpt")
-              ).map((t) => {
-                const lat = t.attributes.getNamedItem("lat").value;
-                const lon = t.attributes.getNamedItem("lon").value;
-                return [lat, lon];
-              });
-              // if (this.trackPolyline) {
-              //   this.trackPolyline.remove(this.map);
-              // }
-              // if (this.marker_arrivalPoint) {
-              //   this.marker_arrivalPoint.remove(this.map);
-              // }
-              drawTrack.bind(this)(latlngs, details.GpsPoints.arrivalpoint);
-            } else {
-              // Else show the normal POI
-              if (STORE_zoomLevel < 16) {
-                STORE_zoomLevel = this.map._zoom + 2;
-              }
-              STORE_position = [marker_position.lat, marker_position.lng];
+        const activity_icon = Leaflet.icon({
+          iconUrl: pinSnow,
+          iconSize: [36, 36],
+        });
 
-              this.map.setView(
-                [marker_position.lat, marker_position.lng],
-                STORE_zoomLevel
-              );
+        const marker = Leaflet.marker(
+          [marker_position.lat, marker_position.lng],
+          {
+            icon: activity_icon,
+          }
+        );
+
+        const action = async () => {
+          this.searchPlacesFound = {};
+          const details = await requestActivityDetails({
+            Id: activity.Id,
+          });
+          if (details) {
+            if (this.trackPolyline) {
+              this.trackPolyline.remove(this.map);
             }
+            if (this.marker_arrivalPoint) {
+              this.marker_arrivalPoint.remove(this.map);
+            }
+            if (details.GpsTrack) {
+              // If the activity has a GpsTrack show it
+              if (details.GpsTrack.length) {
+                const gpx = await requestGPX({
+                  code: details.GpsTrack[0].GpxTrackUrl.split("/gpx/").pop(),
+                });
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(gpx, "text/xml");
+                const latlngs = Array.from(
+                  xmlDoc.getElementsByTagName("trkpt")
+                ).map((t) => {
+                  const lat = t.attributes.getNamedItem("lat").value;
+                  const lon = t.attributes.getNamedItem("lon").value;
+                  return [lat, lon];
+                });
+                // if (this.trackPolyline) {
+                //   this.trackPolyline.remove(this.map);
+                // }
+                // if (this.marker_arrivalPoint) {
+                //   this.marker_arrivalPoint.remove(this.map);
+                // }
+                drawTrack.bind(this)(latlngs, details.GpsPoints.arrivalpoint);
+              } else {
+                // Else show the normal POI
+                if (STORE_zoomLevel < 16) {
+                  STORE_zoomLevel = this.map._zoom + 2;
+                }
+                STORE_position = [marker_position.lat, marker_position.lng];
+
+                this.map.setView(
+                  [marker_position.lat, marker_position.lng],
+                  STORE_zoomLevel
+                );
+              }
+            }
+
+            this.currentActivity = {
+              ...details,
+            };
+
+            this.filtersOpen = false;
+            this.weatherReportOpen = false;
+            this.detailsSkiAreaOpen = false;
+            this.detailsActivityOpen = true;
           }
+        };
 
-          this.currentActivity = {
-            ...details,
-          };
-
-          this.filtersOpen = false;
-          this.weatherReportOpen = false;
-          this.detailsSkiAreaOpen = false;
-          this.detailsActivityOpen = true;
-        }
-      };
-
-      marker.on("mousedown", action);
-      activities_layer_array.push(marker);
+        marker.on("mousedown", action);
+        activities_layer_array.push(marker);
+      }
     }
   });
 
